@@ -17,7 +17,3 @@ To link the nvim configuration to the home folder:
 ```shell
 stow -t ~ nvim
 ```
-
-```shell
-stow -t ~ nvim
-```
