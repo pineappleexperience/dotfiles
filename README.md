@@ -17,3 +17,11 @@ To link the nvim configuration to the home folder:
 ```shell
 stow -t ~ nvim
 ```
+
+# applications
+
+Basic information about supported apllications.
+
+## Neovim
+
+Using [LazyVim](http://www.lazyvim.org/) as a plugin manager.
