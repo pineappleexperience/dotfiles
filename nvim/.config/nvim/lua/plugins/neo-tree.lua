@@ -7,7 +7,24 @@ return {
     "MunifTanjim/nui.nvim",
     -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
   },
-  config = function()
+  opts = {
+    filesystem = {
+      filtered_items = {
+        visible = true,
+        show_hidden_count = true,
+        hide_dotfiles = false,
+        hide_gitignored = false,
+        hide_by_name = {
+          -- '.git',
+          -- '.DS_Store',
+          -- 'thumbs.db',
+        },
+        never_show = {},
+      },
+    }
+  },
+  config = function(_, opts)
+    require("neo-tree").setup(opts)
     vim.keymap.set('n', '<C-n>', ':Neotree filesystem reveal left<CR>', { desc = 'Neotree' })
   end
 }
