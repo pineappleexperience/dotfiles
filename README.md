@@ -34,6 +34,14 @@ Nerd fonts may be downloaded from [Nerd fonts](https://www.nerdfonts.com/). Curr
 
 Using [LazyVim](http://www.lazyvim.org/) as a plugin manager.
 
+### IdeaVim
+
+Configuration for the [IdeaVim IntelliJ plugin](https://plugins.jetbrains.com/plugin/164-ideavim).
+
+### tmux
+
+Using [tmux](https://github.com/tmux/tmux/wiki) as a terminal multiplexer / for window tiling.
+
 ### zsh
 
 See [README of zshrc](./zshrc/README.md).
