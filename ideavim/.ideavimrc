@@ -1,1 +1,6 @@
 set relativenumber
+
+set NERDTree
+
+let g:NERDTreeMapActiveNode='l'
+let g:NERDTreeMapJumpParent='n'
