@@ -49,3 +49,7 @@ See [README of zshrc](./zshrc/README.md).
 ### Aerospace
 
 Using [Aerospace](https://github.com/nikitabobko/AeroSpace) as a window tiling manager.
+
+### Sketchybar
+
+Using [Sketchybar](https://github.com/FelixKratz/SketchyBar) for displaying workspaces.
