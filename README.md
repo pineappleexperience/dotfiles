@@ -45,3 +45,7 @@ Using [tmux](https://github.com/tmux/tmux/wiki) as a terminal multiplexer / for 
 ### zsh
 
 See [README of zshrc](./zshrc/README.md).
+
+### Aerospace
+
+Using [Aerospace](ttps://github.com/nikitabobko/AeroSpace) as a window tiling manager.
