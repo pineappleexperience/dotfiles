@@ -114,6 +114,9 @@ alias ls='colorls'
 alias vim='nvim'
 alias mcp='mvn clean package'
 alias mcv='mvn clean verify'
+alias fzv='vim $(fzf)'
+alias fzcd='cd $(fzf)'
+alias fzla='la $(fzf)'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
