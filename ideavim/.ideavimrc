@@ -37,7 +37,7 @@ vmap <leader>u <C-u>
 " actions
 nmap <leader>h <action>(PreviousTab)
 nmap <leader>l <action>(NextTab)
-nmap <leader>bd <action>(CloseEditor)
+nmap <leader>x <action>(CloseEditor)
 nmap <leader>z <action>(HideAllWindows)
 nmap <leader>i <action>(Generate)
 nmap <leader>g <action>(Git.Menu)
