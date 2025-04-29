@@ -15,8 +15,8 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 -- Insert blank lines above/below
-map("n", "<S-Enter>", "O<Esc>", opts)
-map("n", "<CR>", "o<Esc>", opts)
+-- map("n", "<S-Enter>", "O<Esc>", opts)
+-- map("n", "<CR>", "o<Esc>", opts)
 
 -- Move lines up and down
 map("n", "<C-j>", ":m +1<CR>", opts)

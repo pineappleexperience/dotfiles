@@ -6,8 +6,8 @@ set easymotion
 
 let mapleader = " "
 
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
+" nmap <S-Enter> O<Esc>
+" nmap <CR> o<Esc>
 
 nnoremap <C-j> :m +1<CR>
 nnoremap <C-k> :m -2<CR>
