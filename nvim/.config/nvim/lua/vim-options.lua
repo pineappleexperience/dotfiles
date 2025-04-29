@@ -38,3 +38,22 @@ map("n", "<leader>d", "<C-d>", opts)
 map("n", "<leader>u", "<C-u>", opts)
 map("v", "<leader>d", "<C-d>", opts)
 map("v", "<leader>u", "<C-u>", opts)
+
+-- (Un)checking markdown checklist items
+vim.keymap.set('n', '<leader>c', function()
+  local line = vim.api.nvim_get_current_line()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local row, col = cursor[1], cursor[2]
+
+  local checked = line:find("%[x%]")
+  local unchecked = line:find("%[%s%]")
+
+  if unchecked then
+    line = line:gsub("%[%s%]", "[x]", 1)
+  elseif checked then
+    line = line:gsub("%[x%]", "[ ]", 1)
+  end
+
+  vim.api.nvim_set_current_line(line)
+end, { desc = "Toggle markdown checkbox" })
+
