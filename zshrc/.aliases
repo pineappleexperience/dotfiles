@@ -1,13 +1,73 @@
-# Overrding default applications
+# unix
 alias ls='colorls'
 alias vim='nvim'
+ialias tree='tree -a -I ".svn|.git|.hg|.idea"'
+alias tree2='tree -L 2'
+alias tree3='tree -L 3'
+alias -g md='mkdir -p'
+alias -g wh='which'
+alias grepr='grep -r'
+alias grepi='grep -i'
+alias grepri='grep -ri'
+ialias -g grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+alias fn='find . -name "*'
+alias ff='find . -name "*.'
 
-# Maven
-alias mcp='mvn clean package'
+# executables
+balias clh='curl localhost:'
+balias clh8='curl localhost:8080'
+balias clh9='curl localhost:9080'
+
+# java
+alias -g j='java'
+alias -g jc='javac'
+alias -g jj='java -jar'
+alias -g jv='java -version'
+alias -g jcv='javac -version'
+
+# maven
+alias mvv='mvn -v'
+alias mci='mvn clean install'
+alias mciT='mvn clean install -DskipTests'
+alias mciTT='mvn clean install -Dmaven.test.skip'
+alias mcd='mvn clean deploy'
+alias mcdT='mvn clean deploy -DskipTests'
+alias mcdTT='mvn clean deploy -Dmaven.test.skip'
+alias mp='mvn package'
+alias mpT='mvn package -DskipTests'
+alias mpTT='mvn package -Dmaven.test.skip'
+alias mve='mvn verify'
 alias mcv='mvn clean verify'
+alias mcve='mvn clean verify'
+alias mc='mvn clean'
+alias mct='mvn clean test'
+alias mgs='mvn generate-sources'
+
+# git
+alias gs='git show'
+alias gst='git status'
+alias gupd='git update'
+alias gcob='git checkout -b'
+alias gcmsg='git commit -m'
+alias gsts='git stash save'
 
 # fzf
 alias fzv='vim $(fzf)'
 alias fzcd='cd $(fzf)'
 alias fzla='la $(fzf)'
 
+# docker
+alias dk='docker'
+alias dkp='docker ps'
+alias dkpa='docker ps -a'
+
+# suffix
+# alias -s {pdf,PDF}='background mupdf'
+# alias -s {jpg,JPG,png,PNG}='background gpicview'
+# alias -s {ods,ODS,odt,ODT,odp,ODP,doc,DOC,docx,DOCX,xls,XLS,xlsx,XLSX,xlsm,XLSM,ppt,PPT,pptx,PPTX,csv,CSV}='background libreoffice'
+# alias -s {html,HTML}='background chromium'
+# alias -s {mp4,MP4,mov,MOV,mkv,MKV}='background vlc'
+alias -s {zip,ZIP,war,WAR}="unzip -l"
+alias -s {jar,JAR}="java -jar"
+alias -s gz="tar -tf"
+alias -s {tgz,TGZ}="tar -tf"
