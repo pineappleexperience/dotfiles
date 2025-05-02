@@ -44,7 +44,7 @@ vi-append-clip-selection() {
 }
 zle -N vi-append-clip-selection
 
-bindkey '^N' clear-ls-all
+bindkey '^B' clear-ls-all
 bindkey '^U' clear-tree-2
 bindkey '^Z' clear-tree-3
 bindkey '^X^T' print-current-date
@@ -53,5 +53,3 @@ bindkey '^G' git-status
 
 bindkey -a "^O" copybuffer
 bindkey -a " p" vi-append-clip-selection
-
-echo "✅ Loaded: shortcuts.zsh"

@@ -52,5 +52,3 @@ sourceIfExists() {
 }
 
 sourceIfExists ~/.aliases
-
-echo "✅ Loaded: autocomplete.zsh"

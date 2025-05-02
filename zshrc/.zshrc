@@ -119,5 +119,3 @@ zle-line-finish zle-line-init zle-keymap-select () {
     echo -ne "\e[5 q"
   fi
 }
-
-echo "✅ Loaded: .zshrc"
