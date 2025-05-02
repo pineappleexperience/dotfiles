@@ -1,0 +1,13 @@
+# Overrding default applications
+alias ls='colorls'
+alias vim='nvim'
+
+# Maven
+alias mcp='mvn clean package'
+alias mcv='mvn clean verify'
+
+# fzf
+alias fzv='vim $(fzf)'
+alias fzcd='cd $(fzf)'
+alias fzla='la $(fzf)'
+
