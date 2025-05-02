@@ -42,23 +42,8 @@ expand-alias-space() {
 }
 zle -N expand-alias-space
 
-
-# starts multiple args as programs in background
-background() {
-    for ((i=2;i<=$#;i++)); do
-        ${@[1]} ${@[$i]} &> /dev/null &
-    done
-}
-
-
 bindkey " " expand-alias-space
 bindkey -M isearch " " magic-space
-
-
-# file completion patterns
-zstyle ':completion:*:*:vim:*' file-patterns '^*.(pdf|odt|ods|doc|docx|xls|xlsx|odp|ppt|pptx|mp4|mkv|aux):source-files' '*:all-files'
-zstyle ':completion:*:*:(build-workshop|build-document):*' file-patterns '*.adoc'
-
 
 sourceIfExists() {
   if [ -e $1 ]; then
@@ -67,3 +52,5 @@ sourceIfExists() {
 }
 
 sourceIfExists ~/.aliases
+
+echo "✅ Loaded: autocomplete.zsh"
