@@ -20,6 +20,37 @@ clear-tree-3() {
 }
 zle -N clear-tree-3
 
+fzf-buffer() {
+  local selected
+  selected=$(find . -type f 2> /dev/null | fzf)
+  if [[ -n "$selected" ]]; then
+    LBUFFER+="$selected"
+  fi
+}
+zle -N fzf-buffer
+
+fzf-vim() {
+  clear
+  local selected
+  selected=$(find . -type f 2> /dev/null | fzf)
+  if [[ -n "$selected" ]]; then
+    vim "$selected"
+  fi
+  zle reset-prompt
+}
+zle -N fzf-vim
+
+fzf-cd() {
+  clear
+  local selected
+  selected=$(find . -type d 2> /dev/null | fzf)
+  if [[ -n "$selected" ]]; then
+    cd "$selected"
+  fi
+  zle reset-prompt
+}
+zle -N fzf-cd
+
 print-current-date() {
   LBUFFER+=$(date -I)
 }
@@ -47,6 +78,9 @@ zle -N vi-append-clip-selection
 bindkey '^B' clear-ls-all
 bindkey '^U' clear-tree-2
 bindkey '^Z' clear-tree-3
+bindkey '^F' fzf-buffer
+bindkey '^V' fzf-vim
+bindkey '^R' fzf-cd
 bindkey '^X^T' print-current-date
 bindkey '^X^D' print-unix-timestamp
 bindkey '^G' git-status
