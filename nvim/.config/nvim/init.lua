@@ -15,7 +15,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local opts = {}
+vim.filetype.add({
+  filename = {
+    [".aliases"] = "sh",
+  },
+})
 
 require("vim-options")
 require("lazy").setup("plugins")
