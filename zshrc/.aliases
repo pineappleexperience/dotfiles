@@ -50,6 +50,8 @@ alias gupd='git update'
 alias gcob='git checkout -b'
 alias gcmsg='git commit -m'
 alias gsts='git stash save'
+alias glog='git lg' # custom git alias (see .gitconfig)
+alias glog2='git lg2' # custom git alias (see .gitconfig)
 
 # fzf
 alias fzv='vim $(fzf)'
