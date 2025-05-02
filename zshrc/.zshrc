@@ -73,17 +73,6 @@ ZSH_THEME="afowler"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-vi-mode zsh-syntax-highlighting zsh-autosuggestions)
 
-# vim cursor
-zle-line-finish zle-line-init zle-keymap-select () {
-    if [ $TERM != linux ]; then
-        if [ $KEYMAP = vicmd ]; then
-            echo -ne "\e[2 q"
-        else
-            echo -ne "\e[5 q"
-        fi
-    fi
-}
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -121,3 +110,14 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# vim cursor
+zle-line-finish zle-line-init zle-keymap-select () {
+  if [ $KEYMAP = vicmd ]; then
+    echo -ne "\e[2 q"
+  else
+    echo -ne "\e[5 q"
+  fi
+}
+
+echo "✅ Loaded: .zshrc"
