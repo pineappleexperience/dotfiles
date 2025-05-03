@@ -44,7 +44,7 @@ Using [tmux](https://github.com/tmux/tmux/wiki) as a terminal multiplexer / for 
 
 ### zsh
 
-See [README of zshrc](./zshrc/README.md).
+The zsh configuration uses the [Ruby](https://www.ruby-lang.org/de/) gem [colorls](https://github.com/athityakumar/colorls). In this configuration Ruby is assumed to be installed via [Homebrew](https://brew.sh/).
 
 ### Aerospace
 
