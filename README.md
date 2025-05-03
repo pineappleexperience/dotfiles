@@ -4,6 +4,14 @@ This repository contains configuration files. Inspired by @typecraft-dev.
 
 ## install
 
+For easy installation use the install script:
+
+```shell
+./install.sh
+```
+
+The install script uses [GNU stow](https://www.gnu.org/software/stow/) for creating symlinks in the home directory.
+
 Create a symlink using [GNU stow](https://www.gnu.org/software/stow/) for a `<package>` in the `<target directory>`.
 
 ```shell
