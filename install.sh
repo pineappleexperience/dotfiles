@@ -14,5 +14,7 @@ for folder in "${FOLDERS[@]}"; do
   stow -R -t "$TARGET_DIR" "$folder"
 done
 
+chmod +x ~/.tmux-startup.sh
+
 echo "✅ Dotfiles installation complete."
 
