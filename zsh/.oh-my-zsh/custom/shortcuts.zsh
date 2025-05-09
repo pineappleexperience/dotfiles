@@ -89,5 +89,3 @@ bindkey -a "^O" copybuffer
 bindkey -a " p" vi-append-clip-selection
 
 bindkey -s '^Q' 'cd ~/projects; clear\n'
-bindkey -s '^W' 'cd ~/projects/work; clear\n'
-bindkey -s '^E' 'cd ~/Documents/notes; clear\n'
