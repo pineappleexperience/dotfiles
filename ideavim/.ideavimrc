@@ -4,6 +4,10 @@ set ideajoin
 set surround
 set easymotion
 
+" Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+set ignorecase true
+set smartcase true
+
 let mapleader = " "
 
 " nmap <S-Enter> O<Esc>
