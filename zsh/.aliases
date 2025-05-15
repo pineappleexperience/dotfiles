@@ -24,6 +24,10 @@ alias -g jc='javac'
 alias -g jj='java -jar'
 alias -g jv='java -version'
 alias -g jcv='javac -version'
+# List all available Java versions
+alias javas="echo 'Available Java versions:' && /usr/libexec/java_home -V 2>&1"
+# Change Java version by major version number (e.g., juse 11)
+alias juse='function _juse() { export JAVA_HOME=$(/usr/libexec/java_home -v $1) && export PATH=$JAVA_HOME/bin:$PATH && echo "Switched to Java $1"; }; _juse'
 
 # maven
 alias mvv='mvn -v'
