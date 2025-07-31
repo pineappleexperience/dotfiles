@@ -20,4 +20,4 @@ for dir in */; do
 done
 
 # Final summary
-echo "✅ Pulled $count Git repository(ies)."
+echo "✅ Pulled $count Git repositories."
