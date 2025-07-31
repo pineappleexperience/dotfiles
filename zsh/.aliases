@@ -56,6 +56,8 @@ alias gcmsg='git commit -m'
 alias gsts='git stash save'
 alias glog='git lg' # custom git alias (see .gitconfig)
 alias glog2='git lg2' # custom git alias (see .gitconfig)
+alias gua='~/scripts/update-repos.sh' # Updates all repos in a directory
+
 
 # fzf
 alias fzv='vim $(fzf)'
