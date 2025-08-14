@@ -4,6 +4,9 @@ set ideajoin
 set surround
 set easymotion
 
+" Always yank to clipboard
+set clipboard=unnamedplus
+
 " Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 set ignorecase true
 set smartcase true
