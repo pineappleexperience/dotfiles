@@ -1,5 +1,4 @@
 # unix
-alias ls='colorls'
 alias vim='nvim'
 ialias tree='tree -a -I ".svn|.git|.hg|.idea"'
 alias tree2='tree -L 2'
