@@ -50,7 +50,7 @@ else
   # Try apt-get (can extend for other distros)
   if command -v apt-get &>/dev/null; then
     sudo apt-get update
-    for pkg in stow neovim tmux zsh; do
+    for pkg in stow neovim tmux zsh tree; do
       if ! dpkg -s "$pkg" &>/dev/null; then
         echo "⬇️ Installing $pkg..."
         sudo apt-get install -y "$pkg"
