@@ -19,7 +19,7 @@ if [[ "$OS" == "Darwin" ]]; then
   fi
 
   # Install required tools
-  for pkg in stow neovim tmux; do
+  for pkg in stow neovim tmux tree; do
     if ! brew list --formula | grep -q "^$pkg\$"; then
       echo "⬇️ Installing $pkg..."
       brew install "$pkg"
