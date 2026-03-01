@@ -50,6 +50,8 @@ Configuration for the [IdeaVim IntelliJ plugin](https://plugins.jetbrains.com/pl
 
 Using [tmux](https://github.com/tmux/tmux/wiki) as a terminal multiplexer / for window tiling.
 
+To Install all required plugins via TPM. Press `<leader> I` in any tmux session.
+
 ### zsh
 
 The zsh configuration uses the [Ruby](https://www.ruby-lang.org/de/) gem [colorls](https://github.com/athityakumar/colorls). In this configuration Ruby is assumed to be installed via [Homebrew](https://brew.sh/).
