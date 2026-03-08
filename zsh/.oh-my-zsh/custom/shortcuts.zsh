@@ -75,7 +75,7 @@ vi-append-clip-selection() {
 }
 zle -N vi-append-clip-selection
 
-bindkey '^B' clear-ls-all
+#bindkey '^B' clear-ls-all
 bindkey '^U' clear-tree-2
 bindkey '^Z' clear-tree-3
 bindkey '^F' fzf-buffer
