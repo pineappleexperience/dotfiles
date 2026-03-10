@@ -55,6 +55,71 @@ nmap <leader>/ <action>(ShowErrorDescription)
 nmap <leader>e <action>(GotoNextError)
 nnoremap <leader><leader> <C-Tab>
 
+" --- NeoVim LSP-based key-bindings ---
+" Rename
+nnoremap grn :action RenameElement<CR>
+
+" Code actions / quick fixes
+nnoremap gra :action ShowIntentionActions<CR>
+vnoremap gra :action ShowIntentionActions<CR>
+
+" Find references
+nnoremap grr :action FindUsages<CR>
+
+" Go to implementation
+nnoremap gri :action GotoImplementation<CR>
+
+" Go to definition
+nnoremap grd :action GotoDeclaration<CR>
+
+" Go to declaration
+nnoremap grD :action GotoDeclaration<CR>
+
+" Document symbols (file structure)
+nnoremap gO :action FileStructurePopup<CR>
+
+" Workspace symbols (search everywhere)
+nnoremap gW :action GotoClass<CR>
+
+" Go to type definition
+nnoremap grt :action GotoTypeDeclaration<CR>
+
+" --- Telescope-like search mappings for IdeaVim ---
+
+" Search help
+nnoremap <leader>sh :action HelpTopics<CR>
+
+" Search keymaps
+nnoremap <leader>sk :action Keymap<CR>
+
+" Search files
+nnoremap <leader>sf :action GotoFile<CR>
+
+" Search IDE actions (closest to Telescope builtin picker)
+nnoremap <leader>ss :action GotoAction<CR>
+
+" Search current word in project
+nnoremap <leader>sw :action FindWordAtCaret<CR>
+
+" Live grep in project
+nnoremap <leader>sg :action FindInPath<CR>
+
+" Show diagnostics / problems
+nnoremap <leader>sd :action ActivateProblemsViewToolWindow<CR>
+
+" Resume last search (closest IntelliJ equivalent)
+nnoremap <leader>sr :action SearchEverywhere<CR>
+
+" Recent files
+nnoremap <leader>s. :action RecentFiles<CR>
+
+" Open buffers / recent files switcher
+nnoremap <leader><leader> :action RecentFiles<CR>
+
+" Open Project view
+nnoremap \ :action ActivateProjectToolWindow<CR>
+
 set NERDTree
+let g:NERDTreeMapActivateNode=' '
 let g:NERDTreeMapActivateNode='l'
 let g:NERDTreeMapJumpParent='h'
