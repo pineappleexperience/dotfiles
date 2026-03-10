@@ -3,6 +3,13 @@ set idearefactormode=keep
 set ideajoin
 set surround
 set easymotion
+set which-key
+
+" Plugin for commenting code
+" gcc - comment current line
+" gc - comment selection
+" gc{motion} - comment to motion
+set commentary
 
 " Always yank to clipboard
 set clipboard=unnamedplus
@@ -16,8 +23,8 @@ set scrolloff=10
 
 let mapleader = " "
 
-" nmap <S-Enter> O<Esc>
-" nmap <CR> o<Esc>
+" registers
+nnoremap <leader>sR :registers<CR>
 
 nnoremap <C-j> :m +1<CR>
 nnoremap <C-k> :m -2<CR>
@@ -34,19 +41,16 @@ nmap <leader>P "*P
 vmap <leader>p "*p
 vmap <leader>P "*P
 
-" Navigating panes
-nmap <C-h> <C-w>h
-nmap <C-l> <C-w>l
-
 " scrolling
 nmap <leader>d <C-d>
 nmap <leader>u <C-u>
 vmap <leader>d <C-d>
 vmap <leader>u <C-u>
 
-" actions
-nmap <leader>h <action>(PreviousTab)
-nmap <leader>l <action>(NextTab)
+" tab switching like vim buffers
+nmap <C-h> <action>(PreviousTab)
+nmap <C-l> <action>(NextTab)
+
 nmap <leader>x <action>(CloseEditor)
 nmap <leader>z <action>(HideAllWindows)
 nmap <leader>i <action>(Generate)
@@ -95,6 +99,9 @@ nnoremap <leader>sk :action Keymap<CR>
 " Search files
 nnoremap <leader>sf :action GotoFile<CR>
 
+" Search in files
+nnoremap <leader>sg :action FindInPath<CR>
+
 " Search IDE actions (closest to Telescope builtin picker)
 nnoremap <leader>ss :action GotoAction<CR>
 
@@ -123,3 +130,4 @@ set NERDTree
 let g:NERDTreeMapActivateNode=' '
 let g:NERDTreeMapActivateNode='l'
 let g:NERDTreeMapJumpParent='h'
+let g:NERDTreeMapJumpParent='p'
