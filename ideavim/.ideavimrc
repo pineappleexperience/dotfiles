@@ -26,15 +26,16 @@ let mapleader = " "
 " registers
 nnoremap <leader>sR :registers<CR>
 
-nnoremap <C-j> :m +1<CR>
-nnoremap <C-k> :m -2<CR>
-inoremap <C-j> <Esc>:m +1<CR>gi
-inoremap <C-k> <Esc>:m -2<CR>gi
+" Line movement
+nnoremap <A-j> :m +1<CR>
+nnoremap <A-k> :m -2<CR>
+inoremap <A-j> <Esc>:m +1<CR>gi
+inoremap <A-k> <Esc>:m -2<CR>gi
 
-" system clipboard
-" changed from "+ to "*" in version 2.5.0
-vmap <leader>y "*y
-vmap <leader>d "*d
+" Navigate between editor splits
+nnoremap <C-h> :action PrevSplitter<CR>
+nnoremap <C-l> :action NextSplitter<CR>
+
 nmap <leader>y "*yy
 nmap <leader>p "*p
 nmap <leader>P "*P
@@ -47,9 +48,10 @@ nmap <leader>u <C-u>
 vmap <leader>d <C-d>
 vmap <leader>u <C-u>
 
-nmap <C-h> <action>(PreviousTab)
-nmap <C-l> <action>(NextTab)
+nmap gt <action>(NextTab)
+nmap gT <action>(PreviousTab)
 
+nmap <C-w>c <action>(CloseEditor)
 nmap <leader>x <action>(CloseEditor)
 nmap <leader>z <action>(HideAllWindows)
 nmap <leader>i <action>(Generate)
@@ -126,6 +128,5 @@ nnoremap \ :action ActivateProjectToolWindow<CR>
 
 set NERDTree
 let g:NERDTreeMapActivateNode=' '
-let g:NERDTreeMapActivateNode='l'
 let g:NERDTreeMapJumpParent='h'
 let g:NERDTreeMapJumpParent='p'
