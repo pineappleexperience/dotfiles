@@ -4,6 +4,7 @@ set ideajoin
 set surround
 set easymotion
 set which-key
+set highlightedyank
 
 " Plugin for commenting code
 " gcc - comment current line
