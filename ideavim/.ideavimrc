@@ -5,6 +5,7 @@ set surround
 set easymotion
 set which-key
 set highlightedyank
+set incsearch
 
 " Plugin for commenting code
 " gcc - comment current line
