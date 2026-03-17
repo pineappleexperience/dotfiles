@@ -52,3 +52,4 @@ sourceIfExists() {
 }
 
 sourceIfExists ~/.aliases
+sourceIfExists ~/.custom_aliases
