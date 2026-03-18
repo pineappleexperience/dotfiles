@@ -67,6 +67,8 @@ alias fzla='la $(fzf)'
 alias dk='docker'
 alias dkp='docker ps'
 alias dkpa='docker ps -a'
+alias dkcu="docker compose up -d"
+alias dkcd="docker compose down"
 
 # suffix
 # alias -s {pdf,PDF}='background mupdf'
