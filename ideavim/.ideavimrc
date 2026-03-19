@@ -90,6 +90,9 @@ nnoremap gW :action GotoClass<CR>
 " Go to type definition
 nnoremap grt :action GotoTypeDeclaration<CR>
 
+" Reformat code
+nnoremap <leader>f :action ReformatCode<CR>
+
 " --- Telescope-like search mappings for IdeaVim ---
 
 " Search help
