@@ -273,7 +273,25 @@ require("lazy").setup({
 
 	{ -- Adds CMake commands
 		"Civitasv/cmake-tools.nvim",
-		opts = {},
+		opts = {
+			cmake_build_directory = "dist/${variant:buildType}",
+			cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" },
+		},
+		keys = {
+			{ "<leader>cg", "<cmd>CMakeGenerate<cr>", desc = "[C]Make: [G]enerate" },
+			{ "<leader>cb", "<cmd>CMakeBuild<cr>", desc = "[C]Make: [B]uild" },
+			{ "<leader>cr", "<cmd>CMakeRun<cr>", desc = "[C]Make: [R]un" },
+			{ "<leader>ct", "<cmd>CMakeTest<cr>", desc = "[C]Make: [T]est (ctest)" },
+
+			{ "<leader>cp", "<cmd>CMakeSelectConfigurePreset<cr>", desc = "[C]Make: Select Configure [P]reset" },
+			{ "<leader>cP", "<cmd>CMakeSelectBuildPreset<cr>", desc = "[C]Make: Select Build Preset" },
+
+			{ "<leader>cs", "<cmd>CMakeSelectBuildTarget<cr>", desc = "[C]Make: Select Build Target" },
+			{ "<leader>cS", "<cmd>CMakeSelectLaunchTarget<cr>", desc = "[C]Make: Select Launch Target" },
+
+			{ "<leader>cd", "<cmd>CMakeDebug<cr>", desc = "[C]Make: [D]ebug (DAP)" },
+			{ "<leader>cx", "<cmd>CMakeStopExecutor<cr>", desc = "[C]Make: Stop Executor" },
+		},
 	},
 
 	-- Here is a more advanced example where we pass configuration
@@ -353,6 +371,7 @@ require("lazy").setup({
 
 			-- Document existing key chains
 			spec = {
+				{ "<leader>c", group = "[C]Make" },
 				{ "<leader>s", group = "[S]earch" },
 				{ "<leader>t", group = "[T]oggle" },
 				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
