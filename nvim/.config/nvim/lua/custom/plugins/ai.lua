@@ -23,6 +23,7 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope.nvim",
+			"j-hui/fidget.nvim",
 		},
 		opts = {
 			chat = {
@@ -35,9 +36,38 @@ return {
 		config = function(_, opts)
 			require("codecompanion").setup(opts)
 
-			-- Optional keymaps (manual triggers)
 			vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionActions<cr>", { desc = "[A]I [A]ctions" })
 			vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionChat<cr>", { desc = "[A]I [C]hat" })
+
+			-- CodeCompanion UI notifications
+			local progress = require("fidget.progress")
+			local handles = {}
+			local group = vim.api.nvim_create_augroup("CodeCompanionFidget", {})
+
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "CodeCompanionRequestStarted",
+				group = group,
+				callback = function(e)
+					handles[e.data.id] = progress.handle.create({
+						title = "CodeCompanion",
+						message = "Thinking...",
+						lsp_client = { name = e.data.adapter.formatted_name },
+					})
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "CodeCompanionRequestFinished",
+				group = group,
+				callback = function(e)
+					local h = handles[e.data.id]
+					if h then
+						h.message = e.data.status == "success" and "Done" or "Failed"
+						h:finish()
+						handles[e.data.id] = nil
+					end
+				end,
+			})
 		end,
 	},
 }
