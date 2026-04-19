@@ -6,6 +6,7 @@ local state = {
 		win = -1,
 	},
 }
+
 local function create_floating_window(opts)
 	opts = opts or {}
 	local width = opts.width or math.floor(vim.o.columns * 0.8)
@@ -49,3 +50,5 @@ end
 
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
 vim.keymap.set({ "n", "t" }, "<leader>tt", toggle_terminal, { desc = "[T]erminal" })
+
+return {}
