@@ -38,6 +38,12 @@ return {
 
 			vim.keymap.set({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionActions<cr>", { desc = "[A]I [A]ctions" })
 			vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionChat<cr>", { desc = "[A]I [C]hat" })
+			vim.keymap.set(
+				{ "n", "v" },
+				"<leader>at",
+				"<cmd>CodeCompanionChat Toggle<cr>",
+				{ desc = "[A]I [T]oggle Chat<cr>" }
+			)
 
 			-- CodeCompanion UI notifications
 			local progress = require("fidget.progress")
