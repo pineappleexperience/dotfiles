@@ -525,6 +525,9 @@ require("lazy").setup({
 			},
 		},
 	},
+	-- Java
+	{ "mfussenegger/nvim-jdtls" },
+
 	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
@@ -716,6 +719,13 @@ require("lazy").setup({
 				},
 			})
 
+			local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+			local workspace_dir = vim.fn.stdpath("data")
+				.. package.config:sub(1, 1)
+				.. "jdtls-workspace"
+				.. package.config:sub(1, 1)
+				.. project_name
+
 			-- LSP servers and clients are able to communicate to each other what features they support.
 			--  By default, Neovim doesn't support everything that is in the LSP specification.
 			--  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
@@ -744,6 +754,43 @@ require("lazy").setup({
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
 				-- ts_ls = {},
 				--
+
+				jdtls = {
+
+					-- `cmd` defines the executable to launch eclipse.jdt.ls.
+					-- `jdtls` must be available in $PATH and Python3.9 must be available for this to work.
+					--
+					-- As alternative you could also avoid the `jdtls` wrapper and launch
+					-- eclipse.jdt.ls via the `java` executable
+					-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
+					cmd = {
+						"jdtls",
+						"-data",
+						workspace_dir,
+					},
+
+					-- `root_dir` must point to the root of your project.
+					-- See `:help vim.fs.root`
+					root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
+
+					-- Here you can configure eclipse.jdt.ls specific settings
+					-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
+					-- for a list of options
+					settings = {
+						java = {},
+					},
+
+					-- This sets the `initializationOptions` sent to the language server
+					-- If you plan on using additional eclipse.jdt.ls plugins like java-debug
+					-- you'll need to set the `bundles`
+					--
+					-- See https://codeberg.org/mfussenegger/nvim-jdtls#java-debug-installation
+					--
+					-- If you don't plan on any eclipse.jdt.ls plugins you can remove this
+					init_options = {
+						bundles = {},
+					},
+				},
 
 				lua_ls = {
 					-- cmd = { ... },
