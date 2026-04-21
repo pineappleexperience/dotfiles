@@ -59,7 +59,7 @@ nmap <leader>z <action>(HideAllWindows)
 nmap <leader>i <action>(Generate)
 nmap <leader>g <action>(Git.Menu)
 nmap <leader>/ <action>(ShowErrorDescription)
-nmap <leader>e <action>(GotoNextError)
+nmap <leader>q <action>(GotoNextError)
 
 " --- NeoVim LSP-based key-bindings ---
 " Rename
