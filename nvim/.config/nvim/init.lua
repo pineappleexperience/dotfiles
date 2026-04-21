@@ -778,6 +778,11 @@ require("lazy").setup({
 		},
 	},
 
+	-- some additional colorschemes for finding the right one
+	{ "jacoborus/tender.vim" },
+	{ "catppuccin/nvim" },
+	{ "rebelot/kanagawa.nvim" },
+
 	{ -- You can easily change to a different colorscheme.
 		-- Change the name of the colorscheme plugin below, and then
 		-- change the command in the config to whatever the name of that colorscheme is.
