@@ -28,6 +28,8 @@ rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
 
+	require("plugins.lualine"),
+
 	require("plugins.render"),
 
 	require("plugins.git"),
