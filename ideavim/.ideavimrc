@@ -129,7 +129,7 @@ nnoremap <leader>s. :action RecentFiles<CR>
 nnoremap <leader><leader> :action RecentFiles<CR>
 
 " Open Project view
-nnoremap \ :action ActivateProjectToolWindow<CR>
+nnoremap <leader>e :action ActivateProjectToolWindow<CR>
 
 set NERDTree
 let g:NERDTreeMapActivateNode=' '
