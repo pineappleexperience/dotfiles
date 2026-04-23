@@ -48,5 +48,10 @@ vim.o.inccommand = "split" -- Preview substitutions live, as you type!
 vim.o.cursorline = true
 vim.o.scrolloff = 15
 vim.o.confirm = true
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
+
+vim.opt.expandtab = true -- convert tabs to spaces
+vim.opt.shiftwidth = 4 -- number of spaces inserted for each indentation level
+vim.opt.tabstop = 4 -- number of spaces inserted for tab character
+vim.opt.softtabstop = 4 -- number of spaces inserted for <Tab> key
+vim.opt.smartindent = true -- enable smart indentation
+vim.opt.breakindent = true -- enable line breaking indentation
