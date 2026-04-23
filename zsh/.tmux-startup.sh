@@ -9,7 +9,7 @@ fi
 # Start a session "notes" in ~/Documents/notes if it doesn't exist
 tmux has-session -t notes 2>/dev/null
 if [ $? != 0 ]; then
-  tmux new-session -ds notes -c "$HOME/Documents/notes" "nvim ."
+  tmux new-session -ds notes -c "$HOME/Documents/notes"
 fi
 
 # Start a session "dotfiles" in ~/Documents/dotfiles if it doesn't exist
