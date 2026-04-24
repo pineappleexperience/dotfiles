@@ -2,7 +2,7 @@
   "LuaSnip": { "branch": "master", "commit": "642b0c595e11608b4c18219e93b88d7637af27bc" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
   "cmake-tools.nvim": { "branch": "master", "commit": "bac6ba2354a52c61f731c751cdb0f4e24669bf0d" },
-  "codecompanion.nvim": { "branch": "main", "commit": "0bc486860666272c7ed73612aed56301b1b8e24d" },
+  "codecompanion.nvim": { "branch": "main", "commit": "f70759ee8b63b46ea0cf158dc22daa2a5e9c6319" },
   "conform.nvim": { "branch": "master", "commit": "dca1a190aa85f9065979ef35802fb77131911106" },
   "copilot.lua": { "branch": "master", "commit": "adff470bca742b7658228ed144589250ecb3dc0a" },
   "fidget.nvim": { "branch": "main", "commit": "889e2e96edef4e144965571d46f7a77bcc4d0ddf" },
