@@ -1,5 +1,6 @@
 require("config.options")
 require("config.keymaps")
+require("config.autocmd")
 
 -- [[ Basic Autocommands ]]
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -48,7 +49,6 @@ require("lazy").setup({
 
 	require("plugins.tmux"),
 
-	require("plugins.debug"),
 	-- require 'plugins.indent_line',
 	-- require 'plugins.lint',
 	require("plugins.autopairs"),
@@ -77,6 +77,7 @@ require("lazy").setup({
 	},
 	checker = {
 		enabled = true,
+		notify = false,
 	},
 })
 
