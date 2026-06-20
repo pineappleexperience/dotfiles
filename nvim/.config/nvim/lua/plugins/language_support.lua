@@ -521,11 +521,14 @@ return {
 				-- online, please don't ask me how to install them :)
 				ensure_installed = {
 					-- Update this to ensure that you have the debuggers for the langs you want
-					"delve",
 					"codelldb",
 					"java-debug-adapter",
 					"java-test",
 				},
+			})
+
+			require("nvim-dap-virtual-text").setup({
+				enabled = true,
 			})
 
 			-- Dap UI setup
