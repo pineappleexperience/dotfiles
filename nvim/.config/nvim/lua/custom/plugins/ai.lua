@@ -26,13 +26,11 @@ return {
 			"j-hui/fidget.nvim",
 		},
 		opts = {
-			chat = {
-				adapters = "copilot",
-				model = "gpt-5.2",
-			},
-			inline = {
-				adapters = "copilot",
-				model = "gpt-5.2",
+			interactions = {
+				chat = {
+					adapter = "anthropic",
+					model = "claude-sonnet-4-20250514",
+				},
 			},
 		},
 		config = function(_, opts)
