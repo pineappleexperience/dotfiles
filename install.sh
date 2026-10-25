@@ -6,6 +6,8 @@ FOLDERS=("aerospace" "ideavim" "nvim" "tmux" "zsh")
 
 TARGET_DIR="$HOME"
 
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 OS="$(uname -s)"
 
 echo "🔍 Checking prerequisites..."
@@ -18,15 +20,8 @@ if [[ "$OS" == "Darwin" ]]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 
-  # Install required tools
-  for pkg in stow neovim tmux tree; do
-    if ! brew list --formula | grep -q "^$pkg\$"; then
-      echo "⬇️ Installing $pkg..."
-      brew install "$pkg"
-    else
-      echo "✅ $pkg already installed."
-    fi
-  done
+  echo "⬇️ Installing tools, fonts and apps from the Brewfile..."
+  brew bundle --file "$DOTFILES_DIR/Brewfile"
 
   # Oh My Zsh check
   if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
@@ -34,14 +29,6 @@ if [[ "$OS" == "Darwin" ]]; then
     RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   else
     echo "✅ Oh My Zsh already installed."
-  fi
-
-  # Aerospace check (brew cask)
-  if ! brew list --cask | grep -q "^aerospace\$"; then
-    echo "⬇️ Installing Aerospace..."
-    brew install --cask nikitabobko/tap/aerospace
-  else
-    echo "✅ Aerospace already installed."
   fi
 
 else
@@ -76,7 +63,7 @@ echo "🚀 Installing dotfiles..."
 # Run stow for each folder
 for folder in "${FOLDERS[@]}"; do
   echo "🔁 (Re-)stowing $folder -> $TARGET_DIR"
-  stow -R -t "$TARGET_DIR" "$folder"
+  stow -R -d "$DOTFILES_DIR" -t "$TARGET_DIR" "$folder"
 done
 
 chmod +x ~/.tmux-startup.sh
