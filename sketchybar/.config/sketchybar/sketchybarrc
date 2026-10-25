@@ -11,7 +11,7 @@ FONT="JetBrainsMono Nerd Font"
 
 sketchybar --bar position=top \
 	height=37 \
-	color="$BASE" \
+	color=0x00000000 \
 	display=all \
 	notch_width=200 \
 	padding_left=8 \
