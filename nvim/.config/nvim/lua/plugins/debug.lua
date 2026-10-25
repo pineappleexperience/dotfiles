@@ -1,14 +1,6 @@
---
--- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
-
+-- Debugging with nvim-dap. Java debugging comes from jdtls (java-debug-adapter), see config/java/jdtls.lua.
 return {
-	-- NOTE: Yes, you can install new plugins here!
 	"mfussenegger/nvim-dap",
-	-- NOTE: And you can specify dependencies as well
 	dependencies = {
 		-- Creates a beautiful debugger UI
 		"rcarriga/nvim-dap-ui",
@@ -78,6 +70,59 @@ return {
 			end,
 			desc = "Debug: See last session result.",
 		},
+		{
+			"<leader>dc",
+			function()
+				require("dap").run_to_cursor()
+			end,
+			desc = "Debug: Run to [C]ursor",
+		},
+		{
+			"<leader>dl",
+			function()
+				require("dap").run_last()
+			end,
+			desc = "Debug: Run [L]ast",
+		},
+		{
+			"<leader>dx",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "Debug: Terminate",
+		},
+		{
+			"<leader>dr",
+			function()
+				require("dap").repl.toggle()
+			end,
+			desc = "Debug: Toggle [R]EPL",
+		},
+		{
+			"<leader>de",
+			function()
+				require("dapui").eval()
+			end,
+			mode = { "n", "x" },
+			desc = "Debug: [E]valuate expression",
+		},
+		{
+			"<leader>dp",
+			function()
+				require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+			end,
+			desc = "Debug: Log [P]oint",
+		},
+		{
+			"<leader>da",
+			function()
+				local port = tonumber(vim.fn.input("Debug port: ", "5005"))
+				if port then
+					require("config.java.run").attach(port)
+				end
+			end,
+			desc = "Debug: [A]ttach to a remote JVM",
+		},
 	},
 	config = function()
 		local dap = require("dap")
@@ -96,11 +141,14 @@ return {
 			-- online, please don't ask me how to install them :)
 			ensure_installed = {
 				-- Update this to ensure that you have the debuggers for the langs you want
-				"delve",
 				"codelldb",
 				"java-debug-adapter",
 				"java-test",
 			},
+		})
+
+		require("nvim-dap-virtual-text").setup({
+			enabled = true,
 		})
 
 		-- Dap UI setup
@@ -130,11 +178,11 @@ return {
 		vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
 		local breakpoint_icons = vim.g.have_nerd_font
 				and {
-					Breakpoint = "",
-					BreakpointCondition = "",
-					BreakpointRejected = "",
-					LogPoint = "",
-					Stopped = "",
+					Breakpoint = "",
+					BreakpointCondition = "",
+					BreakpointRejected = "",
+					LogPoint = "",
+					Stopped = "",
 				}
 			or {
 				Breakpoint = "●",
@@ -175,5 +223,18 @@ return {
 			},
 		}
 		dap.configurations.c = dap.configurations.cpp
+
+		-- jdtls adds the discovered main classes to this list
+		dap.configurations.java = {
+			{
+				type = "java",
+				request = "attach",
+				name = "Attach to a remote JVM",
+				hostName = "127.0.0.1",
+				port = function()
+					return tonumber(vim.fn.input("Debug port: ", "5005"))
+				end,
+			},
+		}
 	end,
 }

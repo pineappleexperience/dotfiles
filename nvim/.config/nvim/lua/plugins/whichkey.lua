@@ -64,6 +64,12 @@ return { -- Useful plugin to show you pending keybinds.
 			{ "<leader>s", group = "[S]earch", icon = " " },
 			{ "<leader>t", group = "[T]oggle", icon = " " },
 			{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" }, icon = " " },
+			{ "<leader>J", group = "[J]ava", mode = { "n", "x" } },
+			{ "<leader>T", group = "[T]est" },
+			{ "<leader>d", group = "[D]ebug" },
+			{ "<leader>r", group = "[R]un task / build" },
+			{ "<leader>w", group = "[W]eb server" },
+			{ "<leader>D", group = "[D]atabase" },
 		},
 	},
 }

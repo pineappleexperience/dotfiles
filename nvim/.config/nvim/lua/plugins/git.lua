@@ -74,11 +74,48 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
 			-- Set a vim motion to <Space> + g + <Shift>A to all files changed to the staging area
 			vim.keymap.set("n", "<leader>gA", ":Git add .<cr>", { desc = "[G]it Add [A]ll" })
 			-- Set a vim motion to <Space> + g + a to add the current file and changes to the staging area
-			vim.keymap.set("n", "<leader>ga", "Git add", { desc = "[G]it [A]dd" })
+			vim.keymap.set("n", "<leader>ga", "<cmd>Git add %<cr>", { desc = "[G]it [A]dd" })
 			-- Set a vim motion to <Space> + g + c to commit the current chages
 			vim.keymap.set("n", "<leader>gc", ":Git commit", { desc = "[G]it [C]ommit" })
 			-- Set a vim motion to <Space> + g + p to push the commited changes to the remote repository
-			vim.keymap.set("n", "<leader>gp", "Git push", { desc = "[G]it [P]ush" })
+			vim.keymap.set("n", "<leader>gp", "<cmd>Git push<cr>", { desc = "[G]it [P]ush" })
+			vim.keymap.set("n", "<leader>gs", "<cmd>Git<cr>", { desc = "[G]it [S]tatus" })
+		end,
+	},
+
+	{ -- Side-by-side diffs of local changes, branches, merge requests and file history
+		"dlyongemallo/diffview.nvim",
+		cmd = { "DiffviewOpen", "DiffviewFileHistory", "Review", "ReviewMR" },
+		keys = {
+			{ "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "[G]it [D]iff of local changes" },
+			{ "<leader>gr", "<cmd>Review<cr>", desc = "[G]it [R]eview branch against its target" },
+			{ "<leader>gm", "<cmd>ReviewMR<cr>", desc = "[G]it review [M]erge request" },
+			{
+				"<leader>gM",
+				function()
+					require("config.git_review").open_in_browser()
+				end,
+				desc = "[G]it open [M]erge request in browser",
+			},
+			{ "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", desc = "[G]it file [H]istory" },
+			{ "<leader>gH", "<cmd>DiffviewFileHistory<cr>", desc = "[G]it branch [H]istory" },
+			{ "<leader>gh", ":DiffviewFileHistory<cr>", mode = "x", desc = "[G]it [H]istory of selection" },
+			{ "<leader>gq", "<cmd>DiffviewClose<cr>", desc = "[G]it close diff view" },
+		},
+		opts = {
+			enhanced_diff_hl = true,
+			view = {
+				merge_tool = { layout = "diff3_mixed" },
+			},
+		},
+		config = function(_, opts)
+			require("diffview").setup(opts)
+			vim.api.nvim_create_user_command("Review", function(args)
+				require("config.git_review").review(args.args)
+			end, { nargs = "?", desc = "Review the current branch against a branch, default: the MR target" })
+			vim.api.nvim_create_user_command("ReviewMR", function()
+				require("config.git_review").pick_request()
+			end, { desc = "Check out an open merge request and review it" })
 		end,
 	},
 }

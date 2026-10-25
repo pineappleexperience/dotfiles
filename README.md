@@ -40,7 +40,9 @@ Nerd fonts may be downloaded from [Nerd fonts](https://www.nerdfonts.com/). Curr
 
 ### NeoVim
 
-Using [LazyVim](http://www.lazyvim.org/) as a plugin manager.
+Using [lazy.nvim](https://github.com/folke/lazy.nvim) as a plugin manager.
+
+See [NeoVim for Java development](nvim/.config/nvim/README.md) for using NeoVim as a Java and Jakarta EE IDE.
 
 ### IdeaVim
 

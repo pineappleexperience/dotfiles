@@ -44,7 +44,35 @@ return {
 						path = 1,
 					},
 				},
-				lualine_x = { "encoding", "fileformat", "filetype" },
+				lualine_x = {
+					-- running tasks, servers and debug sessions, like the run widget of IntelliJ. Click opens the task list.
+					{
+						function()
+							return require("config.run_status").text()
+						end,
+						color = function()
+							return require("config.run_status").highlight()
+						end,
+						on_click = function()
+							require("config.run_status").click()
+						end,
+					},
+					-- only shown when they differ from the usual utf-8 and unix
+					{
+						"encoding",
+						cond = function()
+							local encoding = vim.bo.fileencoding
+							return encoding ~= "" and encoding ~= "utf-8"
+						end,
+					},
+					{
+						"fileformat",
+						cond = function()
+							return vim.bo.fileformat ~= "unix"
+						end,
+					},
+					"filetype",
+				},
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
 			},

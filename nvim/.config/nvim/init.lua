@@ -1,6 +1,5 @@
 require("config.options")
 require("config.keymaps")
-require("config.autocmd")
 
 -- [[ Basic Autocommands ]]
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -40,6 +39,14 @@ require("lazy").setup({
 	require("plugins.telescope"),
 
 	require("plugins.language_support"),
+
+	require("plugins.java"),
+
+	require("plugins.debug"),
+
+	require("plugins.tasks"),
+
+	require("plugins.database"),
 
 	require("plugins.autocomplete"),
 

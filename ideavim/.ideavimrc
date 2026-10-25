@@ -1,3 +1,6 @@
+" IdeaVim configuration. The mappings mirror the NeoVim configuration (nvim/.config/nvim/README.md),
+" so the same keys do the same things in both editors.
+
 set number relativenumber
 set idearefactormode=keep
 set ideajoin
@@ -6,6 +9,7 @@ set easymotion
 set which-key
 set highlightedyank
 set incsearch
+set notimeout
 
 " Plugin for commenting code
 " gcc - comment current line
@@ -17,16 +21,15 @@ set commentary
 set clipboard=unnamedplus
 
 " Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-set ignorecase true
-set smartcase true
+set ignorecase
+set smartcase
 
 " Minimal number of screen lines to keep above and below the cursor.
-set scrolloff=10
+set scrolloff=15
 
 let mapleader = " "
 
-" registers
-nnoremap <leader>sR :registers<CR>
+" --- General ---
 
 " Line movement
 nnoremap <A-j> :m +1<CR>
@@ -38,98 +41,164 @@ inoremap <A-k> <Esc>:m -2<CR>gi
 nnoremap <C-h> :action PrevSplitter<CR>
 nnoremap <C-l> :action NextSplitter<CR>
 
+nmap gt <action>(NextTab)
+nmap gT <action>(PreviousTab)
+nmap <C-w>c <action>(CloseEditor)
+
+" File explorer (oil.nvim in NeoVim)
+nmap - <action>(SelectInProjectView)
+nmap <leader>e <action>(ActivateProjectToolWindow)
+
+" IntelliJ only
 nmap <leader>y "*yy
 nmap <leader>p "*p
 nmap <leader>P "*P
 vmap <leader>p "*p
 vmap <leader>P "*P
-
-" scrolling
-nmap <leader>d <C-d>
-nmap <leader>u <C-u>
-vmap <leader>d <C-d>
-vmap <leader>u <C-u>
-
-nmap gt <action>(NextTab)
-nmap gT <action>(PreviousTab)
-
-nmap <C-w>c <action>(CloseEditor)
 nmap <leader>x <action>(CloseEditor)
 nmap <leader>z <action>(HideAllWindows)
 nmap <leader>i <action>(Generate)
-nmap <leader>g <action>(Git.Menu)
-nmap <leader>/ <action>(ShowErrorDescription)
-nmap <leader>q <action>(GotoNextError)
 
-" --- NeoVim LSP-based key-bindings ---
-" Rename
-nnoremap grn :action RenameElement<CR>
+" --- Code navigation (LSP mappings in NeoVim) ---
 
-" Code actions / quick fixes
-nnoremap gra :action ShowIntentionActions<CR>
-vnoremap gra :action ShowIntentionActions<CR>
+nmap gd <action>(GotoDeclaration)
+nmap gD <action>(GotoDeclaration)
+nmap grr <action>(FindUsages)
+nmap gri <action>(GotoImplementation)
+nmap grt <action>(GotoTypeDeclaration)
+nmap grn <action>(RenameElement)
+nmap gra <action>(ShowIntentionActions)
+vmap gra <action>(ShowIntentionActions)
+nmap gO <action>(FileStructurePopup)
+nmap K <action>(QuickJavaDoc)
+nmap ]d <action>(GotoNextError)
+nmap [d <action>(GotoPreviousError)
+nmap <C-w>d <action>(ShowErrorDescription)
+nmap <leader>q <action>(ActivateProblemsViewToolWindow)
+nmap <leader>f <action>(ReformatCode)
+nmap <leader>th <action>(ToggleInlayHintsGloballyAction)
 
-" Find references
-nnoremap grr :action FindUsages<CR>
+" --- Search (Telescope in NeoVim) ---
 
-" Go to implementation
-nnoremap gri :action GotoImplementation<CR>
+nmap <leader>sh <action>(HelpTopics)
+nmap <leader>sk <action>(Keymap)
+nmap <leader>sf <action>(GotoFile)
+nmap <leader>sg <action>(FindInPath)
+nmap <leader>sc <action>(GotoSymbol)
+nmap <leader>so <action>(FileStructurePopup)
+nmap <leader>ss <action>(GotoAction)
+nmap <leader>sw <action>(FindWordAtCaret)
+nmap <leader>sd <action>(ActivateProblemsViewToolWindow)
+nmap <leader>sr <action>(SearchEverywhere)
+nmap <leader>sR :registers<CR>
+nmap <leader>s. <action>(RecentFiles)
+nmap <leader><leader> <action>(RecentFiles)
+nmap <leader>/ <action>(Find)
 
-" Go to definition
-nnoremap grd :action GotoDeclaration<CR>
+" --- Java (<leader>J) ---
 
-" Go to declaration
-nnoremap grD :action GotoDeclaration<CR>
+nmap <leader>Jg <action>(Generate)
+nmap <leader>Jo <action>(OptimizeImports)
+nmap <leader>Jv <action>(IntroduceVariable)
+vmap <leader>Jv <action>(IntroduceVariable)
+nmap <leader>JC <action>(IntroduceConstant)
+vmap <leader>JC <action>(IntroduceConstant)
+vmap <leader>Jm <action>(ExtractMethod)
+nmap <leader>Js <action>(GotoSuperMethod)
+nmap <leader>Jt <action>(DebugClass)
+nmap <leader>JT <action>(DebugClass)
+nmap <leader>Jp <action>(ChooseDebugConfiguration)
+nmap <leader>Ju <action>(Maven.Reimport)
+nmap <leader>Jb <action>(CompileDirty)
+nmap <leader>Jw <action>(InvalidateCaches)
 
-" Document symbols (file structure)
-nnoremap gO :action FileStructurePopup<CR>
+" --- Tests (<leader>T) ---
 
-" Workspace symbols (search everywhere)
-nnoremap gW :action GotoClass<CR>
+nmap <leader>Tn <action>(RunClass)
+nmap <leader>Td <action>(DebugClass)
+nmap <leader>Tf <action>(RunClass)
+nmap <leader>Tl <action>(Rerun)
+nmap <leader>Tx <action>(Stop)
+nmap <leader>Ts <action>(ActivateRunToolWindow)
+nmap <leader>To <action>(ActivateRunToolWindow)
 
-" Go to type definition
-nnoremap grt :action GotoTypeDeclaration<CR>
+" --- Debugging ---
 
-" Reformat code
-nnoremap <leader>f :action ReformatCode<CR>
+nmap <F5> <action>(Resume)
+nmap <F1> <action>(StepInto)
+nmap <F2> <action>(StepOver)
+nmap <F3> <action>(StepOut)
+nmap <F7> <action>(ActivateDebugToolWindow)
+nmap <leader>b <action>(ToggleLineBreakpoint)
+nmap <leader>B <action>(EditBreakpoint)
+nmap <leader>dp <action>(AddLoggingBreakpoint)
+nmap <leader>dc <action>(RunToCursor)
+nmap <leader>de <action>(EvaluateExpression)
+vmap <leader>de <action>(EvaluateExpression)
+nmap <leader>dr <action>(EvaluateExpression)
+nmap <leader>da <action>(XDebugger.AttachToProcess)
+nmap <leader>dl <action>(Debug)
+nmap <leader>dx <action>(Stop)
 
-" --- Telescope-like search mappings for IdeaVim ---
+" --- Run configurations and builds (<leader>r) ---
 
-" Search help
-nnoremap <leader>sh :action HelpTopics<CR>
+nmap <leader>rr <action>(ChooseRunConfiguration)
+nmap <leader>rl <action>(Rerun)
+nmap <leader>rx <action>(Stop)
+nmap <leader>ro <action>(ActivateRunToolWindow)
+nmap <leader>rm <action>(MakeModule)
+nmap <leader>rp <action>(CompileDirty)
+nmap <leader>rc <action>(Compile)
+nmap <leader>rT <action>(RunClass)
 
-" Search keymaps
-nnoremap <leader>sk :action Keymap<CR>
+" --- Server (<leader>w), uses the selected run configuration ---
 
-" Search files
-nnoremap <leader>sf :action GotoFile<CR>
+nmap <leader>wd <action>(Debug)
+nmap <leader>ws <action>(Run)
+nmap <leader>wx <action>(Stop)
+nmap <leader>wr <action>(Rerun)
+nmap <leader>wb <action>(BuildArtifact)
+nmap <leader>wl <action>(ActivateServicesToolWindow)
+nmap <leader>wa <action>(XDebugger.AttachToProcess)
+nmap <leader>ww <action>(ChooseRunConfiguration)
 
-" Search in files
-nnoremap <leader>sg :action FindInPath<CR>
+" --- Git (<leader>g, <leader>h) ---
 
-" Search IDE actions (closest to Telescope builtin picker)
-nnoremap <leader>ss :action GotoAction<CR>
+nmap <leader>gs <action>(ActivateCommitToolWindow)
+nmap <leader>gd <action>(ActivateCommitToolWindow)
+nmap <leader>gr <action>(Git.CompareWithBranch)
+nmap <leader>gm <action>(GitLab.Merge.Request.Show.List)
+nmap <leader>gM <action>(GitLab.Merge.Request.Open.Link)
+nmap <leader>gh <action>(Vcs.ShowTabbedFileHistory)
+vmap <leader>gh <action>(Vcs.ShowHistoryForBlock)
+nmap <leader>gH <action>(ActivateVersionControlToolWindow)
+nmap <leader>gb <action>(Annotate)
+nmap <leader>ga <action>(Git.Add)
+nmap <leader>gc <action>(CheckinProject)
+nmap <leader>gp <action>(Vcs.Push)
+nmap <leader>gg <action>(Git.Menu)
+nmap ]c <action>(VcsShowNextChangeMarker)
+nmap [c <action>(VcsShowPrevChangeMarker)
+nmap <leader>hp <action>(VcsShowCurrentChangeMarker)
+nmap <leader>hr <action>(Vcs.RollbackChangedLines)
+nmap <leader>hb <action>(Annotate)
 
-" Search current word in project
-nnoremap <leader>sw :action FindWordAtCaret<CR>
+" --- Database ---
 
-" Live grep in project
-nnoremap <leader>sg :action FindInPath<CR>
+nmap <leader>Du <action>(ActivateDatabaseToolWindow)
 
-" Show diagnostics / problems
-nnoremap <leader>sd :action ActivateProblemsViewToolWindow<CR>
+" --- which-key group names ---
 
-" Resume last search (closest IntelliJ equivalent)
-nnoremap <leader>sr :action SearchEverywhere<CR>
-
-" Recent files
-nnoremap <leader>s. :action RecentFiles<CR>
-
-" Open buffers / recent files switcher
-nnoremap <leader><leader> :action RecentFiles<CR>
-
-" Open Project view
-nnoremap <leader>e :action ActivateProjectToolWindow<CR>
+let g:WhichKeyDesc_java = "<leader>J Java"
+let g:WhichKeyDesc_test = "<leader>T Test"
+let g:WhichKeyDesc_debug = "<leader>d Debug"
+let g:WhichKeyDesc_run = "<leader>r Run"
+let g:WhichKeyDesc_server = "<leader>w Server"
+let g:WhichKeyDesc_git = "<leader>g Git"
+let g:WhichKeyDesc_hunk = "<leader>h Git hunk"
+let g:WhichKeyDesc_search = "<leader>s Search"
+let g:WhichKeyDesc_toggle = "<leader>t Toggle"
+let g:WhichKeyDesc_database = "<leader>D Database"
 
 set NERDTree
 let g:NERDTreeMapActivateNode=' '

@@ -31,14 +31,6 @@ return {
 		},
 	},
 
-	-- utility plugin for configuring the java language server for us
-	{
-		"mfussenegger/nvim-jdtls",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
-	},
-
 	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
@@ -121,19 +113,18 @@ return {
 					-- Jump to the definition of the word under your cursor.
 					--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-t>.
-					map("grd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+					-- Buffers that map gd themselves keep it (Facelets: EL expression to bean).
+					if vim.fn.maparg("gd", "n", false, true).buffer ~= 1 then
+						map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+					end
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
-					map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
 					map("gO", require("telescope.builtin").lsp_document_symbols, "Open Document Symbols")
-
-					-- Fuzzy find all the symbols in your current workspace.
-					--  Similar to document symbols, except searches over your entire project.
-					map("gW", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Open Workspace Symbols")
 
 					-- Jump to the type of the word under your cursor.
 					--  Useful when you're not sure what type a variable is and you want to see
@@ -238,8 +229,6 @@ return {
 			--  By default, Neovim doesn't support everything that is in the LSP specification.
 			--  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
 			--  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
-			local lspconfig = require("lspconfig")
-
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			-- Enable the following language servers
@@ -251,11 +240,15 @@ return {
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+			-- jdtls is not configured here. nvim-jdtls starts it, see ftplugin/java.lua.
 			local servers = {
 				clangd = {},
-				jdtls = {
-					capabilities = capabilities,
+				-- XML: pom.xml, persistence.xml, faces-config.xml, Liquibase changelogs, Facelets
+				lemminx = {
+					filetypes = { "xml", "xsd", "xsl", "xslt", "svg", "xhtml" },
 				},
+				-- only starts in projects with a biome.json
+				biome = {},
 				-- gopls = {},
 				-- pyright = {},
 				-- rust_analyzer = {},
@@ -266,14 +259,20 @@ return {
 				--
 				-- But for many setups, the LSP (`ts_ls`) will work just fine
 				ts_ls = {
-					capabilities = capabilities,
+					-- Yarn PnP projects have no node_modules, the TypeScript SDK comes from `yarn dlx @yarnpkg/sdks base`
+					before_init = function(params, config)
+						local sdk = config.root_dir and config.root_dir .. "/.yarn/sdks/typescript/lib"
+						if sdk and vim.uv.fs_stat(sdk) then
+							params.initializationOptions = params.initializationOptions or {}
+							params.initializationOptions.tsserver = { path = sdk }
+						end
+					end,
 				},
 				--
 
 				lua_ls = {
 					-- cmd = { ... },
 					-- filetypes = { ... },
-					capabilities = capabilities,
 					settings = {
 						Lua = {
 							completion = {
@@ -303,25 +302,22 @@ return {
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
 				"clang-format",
+				"jdtls",
 				"java-debug-adapter",
 				"java-test",
-				"google-java-format",
+				"vscode-spring-boot-tools",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
+			for server_name, server in pairs(servers) do
+				server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+				vim.lsp.config(server_name, server)
+			end
+
 			require("mason-lspconfig").setup({
 				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-				automatic_installation = false,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for ts_ls)
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
+				-- nvim-jdtls and spring-boot.nvim start their servers themselves
+				automatic_enable = { exclude = { "jdtls", "spring-boot" } },
 			})
 		end,
 	},
@@ -369,7 +365,8 @@ return {
 				-- Disable "format_on_save lsp_fallback" for languages that don't
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = false }
+				-- Java is formatted on demand only, so untouched code in legacy files does not change
+				local disable_filetypes = { c = true, cpp = false, java = true }
 				if disable_filetypes[vim.bo[bufnr].filetype] then
 					return nil
 				else
@@ -379,9 +376,19 @@ return {
 					}
 				end
 			end,
+			formatters = {
+				-- the project's Spotless configuration, falls back to jdtls when the project has none
+				spotless = require("config.java.spotless").formatter,
+				biome = { require_cwd = true },
+			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				cpp = { "clang-format" },
+				java = { "spotless" },
+				javascript = { "biome" },
+				typescript = { "biome" },
+				json = { "biome" },
+				css = { "biome" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -400,17 +407,34 @@ return {
 			require("nvim-treesitter").install({
 				"bash",
 				"c",
+				"css",
 				"diff",
+				"git_config",
+				"git_rebase",
+				"gitcommit",
 				"html",
 				"java",
+				"javascript",
+				"jsdoc",
+				"json",
 				"lua",
 				"luadoc",
 				"markdown",
 				"markdown_inline",
+				"properties",
 				"query",
+				"scss",
+				"sql",
+				"tsx",
+				"typescript",
 				"vim",
 				"vimdoc",
+				"xml",
+				"yaml",
 			})
+
+			-- Facelets
+			vim.treesitter.language.register("html", "xhtml")
 
 			-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
 			local regex_highlight = { ruby = true }
@@ -431,183 +455,6 @@ return {
 					end
 				end,
 			})
-		end,
-	},
-
-	-- ### DAP ###
-	{
-		-- NOTE: Yes, you can install new plugins here!
-		"mfussenegger/nvim-dap",
-		-- NOTE: And you can specify dependencies as well
-		dependencies = {
-			-- Creates a beautiful debugger UI
-			"rcarriga/nvim-dap-ui",
-
-			-- Required dependency for nvim-dap-ui
-			"nvim-neotest/nvim-nio",
-
-			-- will show the values of your variables while your application is running
-			"theHamsta/nvim-dap-virtual-text",
-
-			-- Installs the debug adapters for you
-			"mason-org/mason.nvim",
-			"jay-babu/mason-nvim-dap.nvim",
-
-			-- Add your own debuggers here
-			"leoluz/nvim-dap-go",
-		},
-		keys = {
-			-- Basic debugging keymaps, feel free to change to your liking!
-			{
-				"<F5>",
-				function()
-					require("dap").continue()
-				end,
-				desc = "Debug: Start/Continue",
-			},
-			{
-				"<F1>",
-				function()
-					require("dap").step_into()
-				end,
-				desc = "Debug: Step Into",
-			},
-			{
-				"<F2>",
-				function()
-					require("dap").step_over()
-				end,
-				desc = "Debug: Step Over",
-			},
-			{
-				"<F3>",
-				function()
-					require("dap").step_out()
-				end,
-				desc = "Debug: Step Out",
-			},
-			{
-				"<leader>b",
-				function()
-					require("dap").toggle_breakpoint()
-				end,
-				desc = "Debug: Toggle Breakpoint",
-			},
-			{
-				"<leader>B",
-				function()
-					require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-				end,
-				desc = "Debug: Set Breakpoint",
-			},
-			-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-			{
-				"<F7>",
-				function()
-					require("dapui").toggle()
-				end,
-				desc = "Debug: See last session result.",
-			},
-		},
-		config = function()
-			local dap = require("dap")
-			local dapui = require("dapui")
-
-			require("mason-nvim-dap").setup({
-				-- Makes a best effort to setup the various debuggers with
-				-- reasonable debug configurations
-				automatic_installation = true,
-
-				-- You can provide additional configuration to the handlers,
-				-- see mason-nvim-dap README for more information
-				handlers = {},
-
-				-- You'll need to check that you have the required things installed
-				-- online, please don't ask me how to install them :)
-				ensure_installed = {
-					-- Update this to ensure that you have the debuggers for the langs you want
-					"codelldb",
-					"java-debug-adapter",
-					"java-test",
-				},
-			})
-
-			require("nvim-dap-virtual-text").setup({
-				enabled = true,
-			})
-
-			-- Dap UI setup
-			-- For more information, see |:help nvim-dap-ui|
-			dapui.setup({
-				-- Set icons to characters that are more likely to work in every terminal.
-				--    Feel free to remove or use ones that you like more! :)
-				--    Don't feel like these are good choices.
-				icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
-				controls = {
-					icons = {
-						pause = "⏸",
-						play = "▶",
-						step_into = "⏎",
-						step_over = "⏭",
-						step_out = "⏮",
-						step_back = "b",
-						run_last = "▶▶",
-						terminate = "⏹",
-						disconnect = "⏏",
-					},
-				},
-			})
-
-			-- Change breakpoint icons
-			vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
-			vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
-			local breakpoint_icons = vim.g.have_nerd_font
-					and {
-						Breakpoint = "",
-						BreakpointCondition = "",
-						BreakpointRejected = "",
-						LogPoint = "",
-						Stopped = "",
-					}
-				or {
-					Breakpoint = "●",
-					BreakpointCondition = "⊜",
-					BreakpointRejected = "⊘",
-					LogPoint = "◆",
-					Stopped = "⭔",
-				}
-			for type, icon in pairs(breakpoint_icons) do
-				local tp = "Dap" .. type
-				local hl = (type == "Stopped") and "DapStop" or "DapBreak"
-				vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
-			end
-
-			dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-			dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-			dap.listeners.before.event_exited["dapui_config"] = dapui.close
-
-			-- Install golang specific config
-			require("dap-go").setup({
-				delve = {
-					-- On Windows delve must be run attached or it crashes.
-					-- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-					detached = vim.fn.has("win32") == 0,
-				},
-			})
-
-			dap.configurations.cpp = {
-				{
-					name = "Launch file (codelldb)",
-					type = "codelldb",
-					request = "launch",
-					program = function()
-						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-					end,
-					cwd = "${workspaceFolder}",
-					stopOnEntry = false,
-				},
-			}
-			dap.configurations.c = dap.configurations.cpp
 		end,
 	},
 }

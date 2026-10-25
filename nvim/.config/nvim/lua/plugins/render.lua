@@ -1,11 +1,12 @@
 -- Rendering or display releated plugins
 return {
 
-	{ -- color highlighter
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup({ "*" })
-		end,
+	{ -- color highlighter, maintained fork of norcalli/nvim-colorizer.lua
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = {
+			filetypes = { "*" },
+		},
 	},
 
 	{ -- markdown rendering

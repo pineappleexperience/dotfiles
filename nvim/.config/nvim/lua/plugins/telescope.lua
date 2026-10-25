@@ -51,6 +51,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				mappings = {
 					i = { ["<c-enter>"] = "to_fuzzy_refine" },
 				},
+				-- "BundIdAuthenticator.java fc-buerger-service-bund-id/src/main/java/..." instead of a cut off path
+				path_display = { "filename_first" },
 			},
 			pickers = {
 				find_files = { hidden = true },
@@ -74,6 +76,17 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+		-- classes, methods and fields of the workspace, uses jdtls in non-Java buffers of a Java project
+		vim.keymap.set("n", "<leader>sc", function()
+			require("config.java.symbols").pick()
+		end, { desc = "[S]earch [C]lasses and symbols" })
+		vim.keymap.set("n", "<leader>so", function()
+			if #vim.lsp.get_clients({ bufnr = 0, method = "textDocument/documentSymbol" }) > 0 then
+				builtin.lsp_document_symbols()
+			else
+				builtin.treesitter()
+			end
+		end, { desc = "[S]earch [O]utline of the file" })
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 		vim.keymap.set("n", "<leader>sR", builtin.registers, { desc = "[S]earch [R]egisters" })
