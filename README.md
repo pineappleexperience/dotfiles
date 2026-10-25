@@ -61,8 +61,9 @@ To Install all required plugins via TPM. Press `<leader> I` in any tmux session.
   `<prefix> S` shows the tmux session tree.
 - **Sessions survive a restart**: tmux-resurrect and tmux-continuum save them every 15 minutes and restore
   them when tmux starts.
-- **Look**: Rosé Pine Moon (`tmux/.config/tmux/themes/`). The status line shows the windows and the session,
-  plus a marker while the prefix is pressed or a pane is zoomed.
+- **Look**: colours from the terminal palette (`tmux/.config/tmux/theme.conf`), so tmux follows the terminal
+  theme. The status line shows the windows and the session, plus a marker while the prefix is pressed or a pane
+  is zoomed.
 
 ### Ghostty
 
@@ -71,7 +72,19 @@ JetBrains Mono Nerd Font.
 
 ### zsh
 
-The zsh configuration uses the [Ruby](https://www.ruby-lang.org/de/) gem [colorls](https://github.com/athityakumar/colorls). In this configuration Ruby is assumed to be installed via [Homebrew](https://brew.sh/).
+Plain zsh without a framework, starts in about 0.1s.
+
+- **Prompt**: [Starship](https://starship.rs) (`starship/.config/starship.toml`): directory, git, Java/Node version
+  inside projects, exit code of failed and duration of slow commands.
+- **Node**: [fnm](https://github.com/Schniz/fnm) switches the Node version per project (`.nvmrc`, `.node-version`),
+  yarn comes from corepack (`corepack enable` after installing a Node version).
+- **Navigation**: [zoxide](https://github.com/ajeetdsouza/zoxide), `z <part of a path>` jumps to a known
+  directory, `zi` picks one with fzf.
+- **fzf**: `^T` inserts a file (with preview), `^F`, `^V` and `^R` are own widgets (see `.zsh/keybindings.zsh`).
+- **Listing**: `ls`, `l`, `ll`, `la`, `lt` use [eza](https://eza.rocks).
+- Vi mode, `v` in normal mode edits the command line in NeoVim.
+- Colours come from the terminal palette, so prompt, fzf, eza and the syntax highlighting follow the terminal
+  theme.
 
 ### Aerospace
 

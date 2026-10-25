@@ -2,7 +2,7 @@
 
 set -e
 
-FOLDERS=("aerospace" "ghostty" "ideavim" "nvim" "sesh" "tmux" "zsh")
+FOLDERS=("aerospace" "ghostty" "ideavim" "nvim" "sesh" "starship" "tmux" "zsh")
 
 TARGET_DIR="$HOME"
 
@@ -23,14 +23,6 @@ if [[ "$OS" == "Darwin" ]]; then
   echo "⬇️ Installing tools, fonts and apps from the Brewfile..."
   brew bundle --file "$DOTFILES_DIR/Brewfile"
 
-  # Oh My Zsh check
-  if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-    echo "⬇️ Installing Oh My Zsh..."
-    RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  else
-    echo "✅ Oh My Zsh already installed."
-  fi
-
 else
   echo "🐧 Linux detected."
 
@@ -47,14 +39,6 @@ else
     done
   else
     echo "⚠️ Unknown package manager. Please install dependencies manually."
-  fi
-
-  # Oh My Zsh check
-  if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-    echo "⬇️ Installing Oh My Zsh..."
-    RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  else
-    echo "✅ Oh My Zsh already installed."
   fi
 fi
 

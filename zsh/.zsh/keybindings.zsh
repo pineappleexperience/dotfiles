@@ -71,9 +71,15 @@ zle -N git-status
 vi-append-clip-selection() {
   char=${RBUFFER:0:1}
   RBUFFER=${RBUFFER:1}
-  RBUFFER=$char$(clippaste)$RBUFFER
+  RBUFFER=$char$(pbpaste)$RBUFFER
 }
 zle -N vi-append-clip-selection
+
+# Copies the command line to the clipboard
+copybuffer() {
+  printf "%s" "$BUFFER" | pbcopy
+}
+zle -N copybuffer
 
 #bindkey '^B' clear-ls-all
 bindkey '^U' clear-tree-2

@@ -1,0 +1,58 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Line 1: directory, git, Java/Node version inside projects, exit code of failed and duration of slow commands.
+# Line 2: the input. Colours are the terminal's palette, so the prompt follows the terminal theme:
+# purple = iris, cyan = rose, blue = foam, green = pine, yellow = gold, red = love, bright-black = muted.
+format = """
+$directory$git_branch$git_state$git_status$java$nodejs$status$cmd_duration
+$character"""
+add_newline = true
+
+[directory]
+style = "bold purple"
+truncation_length = 4
+truncate_to_repo = true
+read_only = " 󰌾"
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "blue"
+
+[git_state]
+style = "red"
+
+[git_status]
+format = "([$all_status$ahead_behind]($style) )"
+style = "yellow"
+
+[java]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "cyan"
+version_format = "${major}"
+detect_files = ["pom.xml", "build.gradle", "build.gradle.kts"]
+detect_extensions = []
+
+[nodejs]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "green"
+version_format = "${major}"
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+detect_extensions = []
+
+[status]
+disabled = false
+format = "[✘ $status]($style) "
+style = "red"
+
+[cmd_duration]
+min_time = 2000
+format = "[󱎫 $duration]($style) "
+style = "bright-black"
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](blue)"

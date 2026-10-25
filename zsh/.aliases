@@ -1,5 +1,10 @@
 # unix
 alias vim='nvim'
+alias ls='eza --group-directories-first'
+alias l='eza -l --icons --git --group-directories-first'
+alias ll='eza -l --icons --git --group-directories-first'
+alias la='eza -la --icons --git --group-directories-first'
+alias lt='eza --tree --level=2 --icons --git-ignore'
 ialias tree='tree -a -I ".svn|.git|.hg|.idea"'
 alias tree2='tree -L 2'
 alias tree3='tree -L 3'
