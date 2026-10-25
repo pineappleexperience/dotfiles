@@ -366,6 +366,7 @@ lemminx if they reference an XML schema.
 | Keys | Action |
 |------|--------|
 | `<leader>gs` | Git status (fugitive): `s`/`u` stage/unstage, `=` inline diff, `cc` commit, `g?` help |
+| `<leader>gl` / `<leader>gL` | [lazygit](https://github.com/jesseduffield/lazygit) in a popup / with the commits of the current file |
 | `<leader>gd` | Diff of all local changes, file by file, side by side |
 | `<leader>gr` | Review the current branch: all changes since it forked from the merge request target (or the default branch) |
 | `<leader>gm` | Pick an open merge request (GitLab) or pull request (GitHub), check it out and review it |

@@ -1,28 +1,18 @@
--- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+-- Rosé Pine: Moon when the terminal is dark, Dawn when it is light. NeoVim sets 'background' from the
+-- terminal's colours and reloads the colorscheme when it changes.
 return {
-	{ "jacoborus/tender.vim" },
-	{ "catppuccin/nvim" },
-	{
-		"rebelot/kanagawa.nvim",
-		priority = 1000,
-		config = function()
-			vim.cmd.colorscheme("kanagawa")
-		end,
-	},
-	{ "bluz71/vim-moonfly-colors" },
-
-	{
-		"folke/tokyonight.nvim",
-		priority = 1000,
-		config = function()
-			---@diagnostic disable-next-line: missing-fields
-			require("tokyonight").setup({
-				styles = {
-					comments = { italic = false }, -- Disable italics in comments
-				},
-			})
-
-			-- vim.cmd.colorscheme("tokyonight-night")
-		end,
-	},
+	"rose-pine/neovim",
+	name = "rose-pine",
+	lazy = false,
+	priority = 1000,
+	config = function()
+		require("rose-pine").setup({
+			variant = "auto",
+			dark_variant = "moon",
+			styles = {
+				italic = false,
+			},
+		})
+		vim.cmd.colorscheme("rose-pine")
+	end,
 }

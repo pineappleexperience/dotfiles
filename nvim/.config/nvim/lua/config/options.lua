@@ -45,6 +45,9 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 vim.o.inccommand = "split" -- Preview substitutions live, as you type!
 
+-- Rounded borders for all floating windows (hover, signature help, diagnostics, plugin popups)
+vim.o.winborder = "rounded"
+
 vim.o.cursorline = true
 vim.o.scrolloff = 15
 vim.o.confirm = true

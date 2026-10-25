@@ -83,6 +83,16 @@ return { -- Adds git related signs to the gutter, as well as utilities for manag
 		end,
 	},
 
+	{ -- lazygit in a floating window, files opened from lazygit open in this NeoVim
+		"kdheepak/lazygit.nvim",
+		cmd = { "LazyGit", "LazyGitCurrentFile", "LazyGitLog", "LazyGitFilterCurrentFile" },
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{ "<leader>gl", "<cmd>LazyGit<cr>", desc = "[G]it: [L]azygit" },
+			{ "<leader>gL", "<cmd>LazyGitFilterCurrentFile<cr>", desc = "[G]it: [L]azygit commits of the file" },
+		},
+	},
+
 	{ -- Side-by-side diffs of local changes, branches, merge requests and file history
 		"dlyongemallo/diffview.nvim",
 		cmd = { "DiffviewOpen", "DiffviewFileHistory", "Review", "ReviewMR" },

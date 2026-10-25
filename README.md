@@ -40,7 +40,9 @@ Nerd fonts may be downloaded from [Nerd fonts](https://www.nerdfonts.com/). Curr
 
 ### NeoVim
 
-Using [lazy.nvim](https://github.com/folke/lazy.nvim) as a plugin manager.
+Using [lazy.nvim](https://github.com/folke/lazy.nvim) as a plugin manager. Colorscheme
+[Rosé Pine](https://github.com/rose-pine/neovim): Moon when the terminal is dark, Dawn when it is light. NeoVim
+detects the terminal background and follows when it changes.
 
 See [NeoVim for Java development](nvim/.config/nvim/README.md) for using NeoVim as a Java and Jakarta EE IDE.
 
