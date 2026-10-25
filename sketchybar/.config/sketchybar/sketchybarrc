@@ -41,6 +41,12 @@ source "$ITEM_DIR/ram.sh"
 source "$ITEM_DIR/servers.sh"
 source "$ITEM_DIR/gitlab.sh"
 
+# The bar is transparent, the two sides sit on rounded backgrounds that stay readable on any wallpaper
+sketchybar --add bracket left_side '/workspace\..*/' front_app \
+	--set left_side background.color="$PILL" background.corner_radius=10 background.height=30 \
+	--add bracket right_side gitlab servers ram network audio_output volume battery clock \
+	--set right_side background.color="$PILL" background.corner_radius=10 background.height=30
+
 # Reload with the other colours when macOS switches between dark and light
 sketchybar --add event theme_changed AppleInterfaceThemeChangedNotification \
 	--add item theme left \

@@ -24,7 +24,7 @@ while IFS='|' read -r workspace display; do
 			icon.color="$IRIS" label.color="$TEXT" background.drawing=on)
 	elif [[ -n "$icons" ]]; then
 		args+=(--set "workspace.$workspace" drawing=on display="$display" label="$icons" label.drawing=on
-			icon.color="$MUTED" label.color="$SUBTLE" background.drawing=off)
+			icon.color="$SUBTLE" label.color="$SUBTLE" background.drawing=off)
 	else
 		args+=(--set "workspace.$workspace" drawing=off)
 	fi

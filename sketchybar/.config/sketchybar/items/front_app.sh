@@ -4,6 +4,7 @@
 sketchybar --add item front_app left \
 	--set front_app display=active \
 	padding_left=12 \
+	padding_right=8 \
 	icon.font="sketchybar-app-font:Regular:15.0" \
 	label.font="$FONT:Bold:13.0" \
 	script="$PLUGIN_DIR/front_app.sh" \

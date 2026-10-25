@@ -14,6 +14,7 @@ for workspace in $(aerospace list-workspaces --all); do
 		background.corner_radius=6 \
 		background.height=24 \
 		background.drawing=off \
+		padding_left=4 \
 		click_script="aerospace workspace $workspace"
 done
 

@@ -3,6 +3,7 @@
 
 if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark; then
 	BASE=0xff232136
+	PILL=0xd9232136
 	OVERLAY=0xff393552
 	MUTED=0xff6e6a86
 	SUBTLE=0xff908caa
@@ -13,6 +14,7 @@ if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark; then
 	IRIS=0xffc4a7e7
 else
 	BASE=0xfffaf4ed
+	PILL=0xd9faf4ed
 	OVERLAY=0xfff2e9e1
 	MUTED=0xff9893a5
 	SUBTLE=0xff797593
