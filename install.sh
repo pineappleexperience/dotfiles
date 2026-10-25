@@ -2,7 +2,7 @@
 
 set -e
 
-FOLDERS=("aerospace" "ghostty" "ideavim" "nvim" "tmux" "zsh")
+FOLDERS=("aerospace" "ghostty" "ideavim" "nvim" "sesh" "tmux" "zsh")
 
 TARGET_DIR="$HOME"
 
@@ -66,6 +66,5 @@ for folder in "${FOLDERS[@]}"; do
   stow -R -d "$DOTFILES_DIR" -t "$TARGET_DIR" "$folder"
 done
 
-chmod +x ~/.tmux-startup.sh
 
 echo "✅ Dotfiles installation complete."

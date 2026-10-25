@@ -54,6 +54,21 @@ Using [tmux](https://github.com/tmux/tmux/wiki) as a terminal multiplexer / for 
 
 To Install all required plugins via TPM. Press `<leader> I` in any tmux session.
 
+- **Projects**: one session per project. `<prefix> s` opens the project switcher ([sesh](https://github.com/joshmedeski/sesh)):
+  running sessions, the sessions from `sesh/.config/sesh/sesh.toml` and all directories zoxide knows. Picking
+  one opens or switches to its session, `ctrl+x` closes a session, `ctrl+o` toggles the preview.
+  `~/scripts/zoxide-add-projects.sh` adds all git repositories under `~/projects` to zoxide.
+  `<prefix> S` shows the tmux session tree.
+- **Sessions survive a restart**: tmux-resurrect and tmux-continuum save them every 15 minutes and restore
+  them when tmux starts.
+- **Look**: Rosé Pine Moon (`tmux/.config/tmux/themes/`). The status line shows the windows and the session,
+  plus a marker while the prefix is pressed or a pane is zoomed.
+
+### Ghostty
+
+[Ghostty](https://ghostty.org) is the terminal. Rosé Pine Moon in dark mode, Rosé Pine Dawn in light mode,
+JetBrains Mono Nerd Font.
+
 ### zsh
 
 The zsh configuration uses the [Ruby](https://www.ruby-lang.org/de/) gem [colorls](https://github.com/athityakumar/colorls). In this configuration Ruby is assumed to be installed via [Homebrew](https://brew.sh/).

@@ -1,7 +1,6 @@
-# Autostart tmux
+# Autostart tmux: attach to the running server, else start it (tmux-continuum restores the last sessions)
 if [ "$TMUX" = "" ]; then
-  ~/.tmux-startup.sh
-  tmux attach -t projects
+  tmux attach 2>/dev/null || tmux new-session -s projects -c "$HOME/projects"
 fi
 
 # If you come from bash you might have to change your $PATH.

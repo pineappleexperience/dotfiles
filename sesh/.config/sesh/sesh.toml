@@ -1,0 +1,25 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+# Session names from the last two directories, so worktrees like project/main and project/feature differ
+dir_length = 2
+sort_order = ["tmux", "config", "zoxide"]
+
+[tui]
+placeholder = "Project or session... "
+show_windows = true
+preview = true
+
+[default_session]
+preview_command = "eza --all --git --icons --color=always --group-directories-first {}"
+
+[[session]]
+name = "projects"
+path = "~/projects"
+
+[[session]]
+name = "dotfiles"
+path = "~/projects/personal/dotfiles"
+
+[[session]]
+name = "notes"
+path = "~/Documents/notes"
