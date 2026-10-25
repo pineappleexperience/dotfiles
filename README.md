@@ -48,7 +48,18 @@ See [NeoVim for Java development](nvim/.config/nvim/README.md) for using NeoVim 
 
 ### IdeaVim
 
-Configuration for the [IdeaVim IntelliJ plugin](https://plugins.jetbrains.com/plugin/164-ideavim).
+Configuration for the [IdeaVim IntelliJ plugin](https://plugins.jetbrains.com/plugin/164-ideavim). The key
+bindings mirror the NeoVim configuration.
+
+Same look as the terminal:
+
+1. Install the plugin [Rose Pine Theme](https://plugins.jetbrains.com/plugin/28154-rose-pine-theme)
+   (Settings → Plugins → Marketplace).
+2. Settings → Appearance & Behavior → Appearance: enable **Sync with OS**, choose **Rose Pine Moon** as the dark
+   and **Rose Pine Dawn** as the light theme (the `Islands` variants with the new UI). The editor colour scheme
+   comes with the theme.
+3. Settings → Editor → Font: **JetBrains Mono**, size 13.
+4. Settings → Tools → Terminal: font **JetBrainsMono Nerd Font Mono**, so the prompt icons render.
 
 ### tmux
 
@@ -105,4 +116,14 @@ Using [Aerospace](https://github.com/nikitabobko/AeroSpace) as a window tiling m
 
 ### Sketchybar
 
-Using [Sketchybar](https://github.com/FelixKratz/SketchyBar) for displaying workspaces.
+[Sketchybar](https://github.com/FelixKratz/SketchyBar) replaces the macOS menu bar (System Settings → Control
+Center → "Automatically hide and show the menu bar": Always). AeroSpace starts it. Rosé Pine Moon or Dawn,
+following the macOS appearance.
+
+- Left: AeroSpace workspaces with windows (with app icons, the current one highlighted, clickable) on the
+  display of their monitor, the active app.
+- Right, only when relevant: GitLab (merge requests to review, failed and running pipelines of my merge
+  requests, only while the VPN is connected), local servers listening on the ports in `settings.sh`, RAM,
+  VPN or offline, headphones or another audio output, volume (click mutes), battery, date and time.
+- `sketchybar/.config/sketchybar/settings.sh` holds the server ports, the VPN name and the GitLab host. The
+  GitLab item needs `glab auth login --hostname <host>`.

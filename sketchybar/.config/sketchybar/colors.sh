@@ -1,26 +1,24 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+# Rosé Pine Moon in dark mode, Rosé Pine Dawn in light mode (https://rosepinetheme.com/palette)
 
-# Color Palette
-BLACK=0xff181926
-WHITE=0xffcad3f5
-RED=0xffed8796
-GREEN=0xffa6da95
-BLUE=0xff8aadf4
-YELLOW=0xffeed49f
-ORANGE=0xfff5a97f
-MAGENTA=0xffc6a0f6
-GREY=0xff939ab7
-TRANSPARENT=0x00000000
-
-# General bar colors
-BAR_COLOR=0xcc24273a #$GREY # Grey bar
-ICON_COLOR=$WHITE # Color of all icons
-LABEL_COLOR=$WHITE # Color of all labels
-
-POPUP_BACKGROUND_COLOR=$BLACK
-POPUP_BORDER_COLOR=$WHITE
-
-SHADOW_COLOR=$BLACK
-
-# Item specific special colors
-SPOTIFY_GREEN=$GREEN
+if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark; then
+	BASE=0xff232136
+	OVERLAY=0xff393552
+	MUTED=0xff6e6a86
+	SUBTLE=0xff908caa
+	TEXT=0xffe0def4
+	LOVE=0xffeb6f92
+	GOLD=0xfff6c177
+	FOAM=0xff9ccfd8
+	IRIS=0xffc4a7e7
+else
+	BASE=0xfffaf4ed
+	OVERLAY=0xfff2e9e1
+	MUTED=0xff9893a5
+	SUBTLE=0xff797593
+	TEXT=0xff575279
+	LOVE=0xffb4637a
+	GOLD=0xffea9d34
+	FOAM=0xff56949f
+	IRIS=0xff907aa9
+fi

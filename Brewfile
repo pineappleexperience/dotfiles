@@ -38,3 +38,5 @@ brew "maven"
 # Window management and menu bar
 cask "aerospace"
 brew "sketchybar"
+cask "font-sketchybar-app-font"
+brew "switchaudio-osx"
