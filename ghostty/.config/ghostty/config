@@ -1,0 +1,24 @@
+# Ghostty configuration. `ghostty +show-config --default --docs` lists all options.
+
+# Look: Rosé Pine Moon in dark mode, Rosé Pine Dawn in light mode, following macOS
+theme = light:Rose Pine Dawn,dark:Rose Pine Moon
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 13
+window-padding-x = 8
+window-padding-y = 6
+window-padding-balance = true
+macos-titlebar-style = tabs
+cursor-style-blink = false
+mouse-hide-while-typing = true
+
+# Option keeps typing special characters (@, [, {, ...) on the German keyboard
+macos-option-as-alt = false
+
+# The shell sets the cursor shape for vi mode itself
+shell-integration-features = no-cursor
+
+# Copying with the mouse goes to the system clipboard
+copy-on-select = clipboard
+
+window-save-state = always
+confirm-close-surface = false

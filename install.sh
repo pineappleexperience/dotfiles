@@ -2,7 +2,7 @@
 
 set -e
 
-FOLDERS=("aerospace" "ideavim" "nvim" "tmux" "zsh")
+FOLDERS=("aerospace" "ghostty" "ideavim" "nvim" "tmux" "zsh")
 
 TARGET_DIR="$HOME"
 
