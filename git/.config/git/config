@@ -1,0 +1,18 @@
+# Global git settings in addition to ~/.gitconfig (which takes precedence)
+
+[core]
+	pager = ~/scripts/delta-pager.sh
+
+[interactive]
+	diffFilter = ~/scripts/delta-pager.sh --color-only
+
+[delta]
+	# n/N jump between files in a diff
+	navigate = true
+	line-numbers = true
+
+[diff]
+	colorMoved = default
+
+[merge]
+	conflictStyle = zdiff3

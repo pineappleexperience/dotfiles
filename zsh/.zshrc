@@ -74,6 +74,7 @@ bindkey -M viins -r '\ec'
 # fnm keeps temporary links per shell in $XDG_STATE_HOME, the cache directory is always writable
 eval "$(XDG_STATE_HOME="$HOME/.cache" fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 eval "$(zoxide init zsh)"
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 eval "$(starship init zsh)"
 
 # --- Aliases and key bindings ---

@@ -1,0 +1,46 @@
+# lazygit configuration, loaded via LG_CONFIG_FILE (see .zshrc).
+# Colours are the terminal's palette, so lazygit follows the terminal theme:
+# magenta = iris, blue = foam, cyan = rose, yellow = gold, red = love, black = overlay.
+gui:
+  nerdFontsVersion: "3"
+  showRandomTip: false
+  showCommandLog: false
+  theme:
+    activeBorderColor:
+      - magenta
+      - bold
+    inactiveBorderColor:
+      - default
+    searchingActiveBorderColor:
+      - yellow
+      - bold
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - black
+    inactiveViewSelectedLineBgColor:
+      - black
+    cherryPickedCommitFgColor:
+      - blue
+    cherryPickedCommitBgColor:
+      - cyan
+    markedBaseCommitFgColor:
+      - blue
+    markedBaseCommitBgColor:
+      - yellow
+    unstagedChangesColor:
+      - red
+    defaultFgColor:
+      - default
+
+git:
+  # delta in the Rosé Pine variant of the terminal, side by side when the view is wide enough
+  diffRenderers:
+    - command: >-
+        delta --{{colorScheme}} --paging=never
+        --syntax-theme={{if eq .colorScheme "light"}}rose-pine-dawn{{else}}rose-pine-moon{{end}}
+        {{if gt .width 160}}--side-by-side{{end}}
+
+os:
+  # inside NeoVim (<leader>gl) files open in that NeoVim, otherwise in a new one
+  editPreset: nvim-remote

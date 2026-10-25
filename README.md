@@ -88,6 +88,17 @@ Plain zsh without a framework, starts in about 0.1s.
 - Colours come from the terminal palette, so prompt, fzf, eza and the syntax highlighting follow the terminal
   theme.
 
+### Git
+
+- `git/.config/git/config` is read in addition to `~/.gitconfig`: [delta](https://github.com/dandavison/delta)
+  shows diffs with syntax highlighting and line numbers (`n`/`N` jump between files), moved lines are marked,
+  merge conflicts show the common ancestor. `~/scripts/delta-pager.sh` picks Rosé Pine Moon or Dawn from the
+  macOS appearance.
+- [lazygit](https://github.com/jesseduffield/lazygit) (`lazygit/.config/lazygit/config.yml`, `<leader>gl` in
+  NeoVim): terminal colours, delta side by side in wide views, files open in the surrounding NeoVim.
+- [bat](https://github.com/sharkdp/bat) has the Rosé Pine themes (`bat/.config/bat/themes`), delta uses them too.
+  After changing them run `bat cache --build`.
+
 ### Aerospace
 
 Using [Aerospace](https://github.com/nikitabobko/AeroSpace) as a window tiling manager.

@@ -1,0 +1,5 @@
+# Rosé Pine Moon in dark mode, Rosé Pine Dawn in light mode, detected from the terminal
+--theme=auto
+--theme-dark="rose-pine-moon"
+--theme-light="rose-pine-dawn"
+--style="numbers,changes,header"

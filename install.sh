@@ -2,7 +2,7 @@
 
 set -e
 
-FOLDERS=("aerospace" "ghostty" "ideavim" "nvim" "sesh" "starship" "tmux" "zsh")
+FOLDERS=("aerospace" "bat" "ghostty" "git" "ideavim" "lazygit" "nvim" "sesh" "starship" "tmux" "zsh")
 
 TARGET_DIR="$HOME"
 
@@ -50,5 +50,10 @@ for folder in "${FOLDERS[@]}"; do
   stow -R -d "$DOTFILES_DIR" -t "$TARGET_DIR" "$folder"
 done
 
+
+# bat and delta load the Rosé Pine themes from bat's cache
+if command -v bat &>/dev/null; then
+  bat cache --build
+fi
 
 echo "✅ Dotfiles installation complete."
