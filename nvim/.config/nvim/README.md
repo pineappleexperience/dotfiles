@@ -110,6 +110,35 @@ Java specific mappings (`<leader>J`):
 Commands from nvim-jdtls: `:JdtCompile`, `:JdtSetRuntime`, `:JdtBytecode` (javap), `:JdtJshell`,
 `:JdtShowLogs`.
 
+## Buffers, windows and tabs
+
+NeoVim works differently from IntelliJ here: every opened file stays loaded as a **buffer**, even when no window
+shows it. **Windows** (splits) show buffers, and a **tab** is a layout of windows. So instead of keeping many tabs,
+switch buffers with `<leader><leader>` and use tabs for separate layouts (e.g. a diff, the debugger, a second
+task).
+
+| Keys / command | Action |
+|----------------|--------|
+| `<leader><leader>` | Pick an open buffer |
+| `:tabnew` / `:tabedit <file>` | New empty tab / open a file in a new tab |
+| `<C-w>T` | Move the current window into a new tab |
+| `gt` / `gT` / `<n>gt` | Next / previous / n-th tab |
+| `:tabclose` / `:tabonly` | Close the tab / close all other tabs |
+| `:vsplit` / `:split` (`<C-w>v` / `<C-w>s`) | Split right / below |
+| `<C-w>q` | Close the window |
+| `<C-h/j/k/l>` | Move between windows (and tmux panes) |
+| `<C-w>=` / `<C-w>o` | Equal sizes / keep only the current window |
+
+Opening a file or class somewhere else:
+
+| From | Right split | Below | New tab |
+|------|-------------|-------|---------|
+| Telescope (`<leader>sf`, `<leader>sg`, `<leader>sc`, `gd` with several results, …) | `<C-v>` | `<C-x>` | `<C-t>` |
+| oil (`-`) | `<C-s>` | `<C-h>` | `<C-t>` |
+| Definition under the cursor | `<C-w>v` then `gd` | `<C-w>]` | `<C-w>]` then `<C-w>T` |
+
+`<C-w>]` jumps to the definition in a new split below, the language server answers it like `gd`.
+
 ## Formatting
 
 `<leader>f` formats the buffer with the project's own formatter:
