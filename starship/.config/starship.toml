@@ -28,7 +28,7 @@ style = "yellow"
 
 [java]
 format = "[$symbol$version]($style) "
-symbol = " "
+symbol = " "
 style = "cyan"
 version_format = "${major}"
 detect_files = ["pom.xml", "build.gradle", "build.gradle.kts"]

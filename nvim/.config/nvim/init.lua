@@ -10,6 +10,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- No line numbers in terminal buffers (task output, lazygit)
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+	callback = function()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
+	end,
+})
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -47,6 +56,10 @@ require("lazy").setup({
 	require("plugins.tasks"),
 
 	require("plugins.database"),
+
+	require("plugins.session"),
+
+	require("plugins.search_replace"),
 
 	require("plugins.autocomplete"),
 

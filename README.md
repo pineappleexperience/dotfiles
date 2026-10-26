@@ -34,7 +34,8 @@ Manual steps after the first installation:
 3. tmux: `<prefix> I` installs the tmux plugins (prefix is `Ctrl+b`).
 4. NeoVim: start it once so lazy.nvim and Mason install the plugins and language servers, then
    `:NeotestJava setup`.
-5. Node: `fnm install --lts`, then `corepack enable` for yarn.
+5. Java and Node: `install.sh` registers the installed JDKs with mise and installs the default Node version. For
+   more Node versions: `mise install node@<version>`, then `mise exec node@<version> -- corepack enable` for yarn.
 6. GitLab: `glab auth login --hostname <host>` for merge request reviews in NeoVim and the Sketchybar item.
 7. IntelliJ: theme and font, see [IdeaVim](#ideavim).
 8. `~/scripts/zoxide-add-projects.sh` makes all git repositories under `~/projects` known to the project
@@ -48,6 +49,7 @@ Manual steps after the first installation:
 | Session for any directory | `sesh connect <dir>` in the shell, e.g. `sesh connect .` |
 | Jump to a directory | `z <part of the path>`, `zi` to pick one |
 | Find a file / text / class in NeoVim | `<leader>sf` / `<leader>sg` / `<leader>sc` |
+| Replace in the whole project | `<leader>sp` in NeoVim |
 | Build, run configurations, servers | `<leader>r…` and `<leader>w…` in NeoVim, see the [NeoVim README](nvim/.config/nvim/README.md) |
 | Git | `<leader>gl` lazygit, `<leader>gd` diff, `<leader>gr` review the branch |
 | Workspaces | `Alt+<letter>`, Ghostty is on `U`, IntelliJ on `I` |
@@ -95,12 +97,16 @@ Plain zsh without a framework (`zsh/.zshrc`), starts in about 0.1s.
 
 - **Prompt**: [Starship](https://starship.rs) (`starship/.config/starship.toml`), two lines: directory, git,
   Java/Node version inside projects, exit code of failed and duration of slow commands, then the input.
-- **Node**: [fnm](https://github.com/Schniz/fnm) switches the Node version per project (`.nvmrc`, `.node-version`),
-  yarn comes from corepack.
-- **Java**: `javas` lists the installed JDKs, `juse <version>` switches the current shell.
+- **Java and Node**: [mise](https://mise.jdx.dev) sets the versions per project from `mise.toml`, `.java-version`,
+  `.nvmrc` or `.node-version`, defaults are Java 25 and Node 24 (`mise/.config/mise/config.toml`). The JDKs are the
+  installed ones (`~/scripts/mise-link-jdks.sh` registers new ones). `mise use java@11` pins a project to Java 11
+  (writes `mise.toml`), `mise use --env local java@11` does it without a file for git (`mise.local.toml`),
+  `juse 11` switches only the current shell, `mise ls` shows what is active. `java`, `mvn` and the prompt use the
+  selected JDK.
 - **Navigation**: [zoxide](https://github.com/ajeetdsouza/zoxide): `z <part of a path>`, `zi`.
-- **fzf**: `^T` inserts a file (with preview). Own widgets in `zsh/.zsh/keybindings.zsh`: `^F` inserts a file,
-  `^V` opens a file in NeoVim, `^R` changes into a directory, `^G` git status.
+- **fzf**: `^T` inserts a file (with preview), `^R` searches the history. Own widgets in
+  `zsh/.zsh/keybindings.zsh`: `^F` inserts a file, `^V` opens a file in NeoVim, `^O` changes into a directory,
+  `^G` git status.
 - **Listing**: `ls`, `l`, `ll`, `la`, `lt` use [eza](https://eza.rocks).
 - **Aliases**: `zsh/.aliases` (Maven, git, Docker, Java). Typed aliases expand on space
   (`zsh/.zsh/alias-expansion.zsh`).
@@ -157,4 +163,5 @@ backgrounds.
 - Right, only when relevant: GitLab (merge requests to review, failed and running pipelines of my merge
   requests, only while the VPN is connected), local servers listening on the configured ports, RAM, VPN or
   offline, headphones or another audio output, volume (click mutes), battery, date and time.
-- `settings.sh` holds the server ports, the VPN name and the GitLab host.
+- `settings.sh` holds the server URLs, the browser for them, the VPN name and the GitLab host. A click on the
+  servers opens the running one in the browser, a menu when several run.

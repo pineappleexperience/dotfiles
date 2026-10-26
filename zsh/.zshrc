@@ -7,8 +7,6 @@ export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
 HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 
-export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
-
 # --- History ---
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
@@ -71,8 +69,9 @@ source <(fzf --zsh)
 # Alt+C arrives as Esc c (Option types special characters), which would hijack a quick Esc + c in vi mode
 bindkey -M viins -r '\ec'
 
-# fnm keeps temporary links per shell in $XDG_STATE_HOME, the cache directory is always writable
-eval "$(XDG_STATE_HOME="$HOME/.cache" fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+# Java and Node per project (mise.toml, .java-version, .nvmrc, .node-version), defaults in ~/.config/mise
+export MISE_STATE_DIR="$HOME/.cache/mise/state"
+eval "$(mise activate zsh)"
 eval "$(zoxide init zsh)"
 export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 eval "$(starship init zsh)"

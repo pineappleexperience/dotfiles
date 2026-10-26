@@ -86,7 +86,7 @@ bindkey '^U' clear-tree-2
 bindkey '^Z' clear-tree-3
 bindkey '^F' fzf-buffer
 bindkey '^V' fzf-vim
-bindkey '^R' fzf-cd
+bindkey '^O' fzf-cd
 bindkey '^X^T' print-current-date
 bindkey '^X^D' print-unix-timestamp
 bindkey '^G' git-status

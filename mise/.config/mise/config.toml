@@ -1,0 +1,8 @@
+# Default versions. Projects override them with mise.toml, .java-version, .nvmrc or .node-version.
+# The JDKs are the installed ones (see ~/scripts/mise-link-jdks.sh), named by their major version.
+[tools]
+java = "25"
+node = "24"
+
+[settings]
+idiomatic_version_file_enable_tools = ["java", "node"]

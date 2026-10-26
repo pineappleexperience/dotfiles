@@ -32,7 +32,7 @@ brew "lazygit"
 brew "glab"
 
 # Languages
-brew "fnm"
+brew "mise"
 brew "maven"
 
 # Window management and menu bar

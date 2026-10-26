@@ -1,6 +1,8 @@
-# Global git settings in addition to ~/.gitconfig (which takes precedence)
+# Global git settings. ~/.gitconfig only holds name and email and takes precedence.
 
 [core]
+	autocrlf = input
+	editor = nvim
 	pager = ~/scripts/delta-pager.sh
 
 [interactive]
@@ -16,3 +18,11 @@
 
 [merge]
 	conflictStyle = zdiff3
+
+[alias]
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg = lg1
+
+[pull]
+	rebase = false

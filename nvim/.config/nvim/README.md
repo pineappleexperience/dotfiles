@@ -87,6 +87,7 @@ These mappings work in every language with a language server.
 | `<leader>f` | Format the buffer |
 | `<leader>th` | Toggle inlay hints (parameter names) |
 | `<leader>sf` / `<leader>sg` | Search files / grep |
+| `<leader>sp` | Search and replace in the whole project with preview ([grug-far](https://github.com/MagicDuck/grug-far.nvim)), in visual mode for the selection |
 | `]d` / `[d` | Next / previous diagnostic, `<C-w>d` shows the message |
 | `<leader>q` | Diagnostics in the location list, `<leader>sd` searches all diagnostics |
 
@@ -138,6 +139,12 @@ Opening a file or class somewhere else:
 | Definition under the cursor | `<C-w>v` then `gd` | `<C-w>]` | `<C-w>]` then `<C-w>T` |
 
 `<C-w>]` jumps to the definition in a new split below, the language server answers it like `gd`.
+
+## Sessions
+
+Starting `nvim` without arguments in a directory restores the files and windows of the last session there
+([persistence.nvim](https://github.com/folke/persistence.nvim), one session per directory and git branch).
+`<leader>sS` picks another session. Starting `nvim <file>` or `nvim .` does not restore.
 
 ## Formatting
 
@@ -453,5 +460,7 @@ IntelliJ.
 | `lua/plugins/debug.lua` | nvim-dap |
 | `lua/plugins/tasks.lua` | overseer, build and server mappings |
 | `lua/plugins/database.lua` | Database UI |
+| `lua/plugins/session.lua` | Session restore |
+| `lua/plugins/search_replace.lua` | Search and replace in the project |
 | `lua/plugins/git.lua` | gitsigns, fugitive, diffview |
 | `lua/plugins/language_support.lua` | Other language servers, formatters, treesitter |

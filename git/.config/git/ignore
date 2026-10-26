@@ -1,1 +1,4 @@
 **/.claude/settings.local.json
+
+# local mise tool versions (mise use --env local)
+mise.local.toml
