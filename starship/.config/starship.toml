@@ -16,7 +16,7 @@ read_only = " 󰌾"
 
 [git_branch]
 format = "[$symbol$branch]($style) "
-symbol = " "
+symbol = "󰘬 "
 style = "blue"
 
 [git_state]
@@ -36,7 +36,7 @@ detect_extensions = []
 
 [nodejs]
 format = "[$symbol$version]($style) "
-symbol = " "
+symbol = "󰎙 "
 style = "green"
 version_format = "${major}"
 detect_files = ["package.json", ".nvmrc", ".node-version"]

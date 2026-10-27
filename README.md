@@ -136,6 +136,15 @@ Same look as the terminal:
 3. Settings → Editor → Font: **JetBrains Mono**, size 13.
 4. Settings → Tools → Terminal: font **JetBrainsMono Nerd Font Mono**, so the prompt icons render.
 
+### Command line tools
+
+| Task | Tool | Examples |
+|------|------|----------|
+| Archives | [ouch](https://github.com/ouch-org/ouch) | `ouch d app.zip` (decompress), `ouch c dir out.tar.gz` (compress), `ouch l app.war` (list) |
+| Certificates | [step](https://smallstep.com/docs/step-cli) | `step certificate inspect cert.pem`, `step certificate inspect https://host` (chain and validity), `step certificate create` (test CAs and certificates), `step certificate format` (PEM ↔ DER). Java keystores: KeyStore Explorer or `keytool` |
+| Log files | [lnav](https://lnav.org) | `lnav catalina.out formcycle.log` merges by time, `/` searches, `e`/`E` jump between errors, `:filter-in`, `;` SQL queries |
+| Images | Preview | `open image.png` (floats over the current workspace) |
+
 ### Git
 
 - `git/.config/git/config` is read in addition to `~/.gitconfig`: [delta](https://github.com/dandavison/delta)
@@ -150,8 +159,11 @@ Same look as the terminal:
 
 Tiling window manager (`aerospace/.config/aerospace/aerospace.toml`). `Alt+<letter or digit>` switches to a
 workspace, `Alt+Shift+<letter or digit>` moves the window there, `Alt+Tab` goes back to the previous workspace.
-Apps open on fixed workspaces (Ghostty on `U`, IntelliJ on `I`, Outlook on `M`, …). AeroSpace starts Sketchybar and
-leaves room for it at the top.
+Apps open on fixed workspaces (Ghostty on `U`, IntelliJ on `I`, Outlook on `M`, …). Viewers and helpers (Preview,
+KeyStore Explorer, System Settings, Calculator, Archive Utility, Activity Monitor, the VPN client) float on the
+current workspace and can be moved freely; more apps go to the floating rules at the end of the file (find an app's
+id with `aerospace list-apps`). `Alt+Shift+;` then `f` toggles a single window between floating and tiling.
+AeroSpace starts Sketchybar and leaves room for it at the top.
 
 ### Sketchybar
 

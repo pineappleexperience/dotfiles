@@ -3,10 +3,10 @@ local M = {}
 
 local icons = {
 	server = "󰒋",
-	task = "",
-	debug = "",
-	paused = "",
-	failed = "",
+	task = "󰒓",
+	debug = "󰃤",
+	paused = "󰏤",
+	failed = "󰀨",
 }
 
 local function truncate(text, length)

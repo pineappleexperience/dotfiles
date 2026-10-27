@@ -31,6 +31,11 @@ brew "git-delta"
 brew "lazygit"
 brew "glab"
 
+# Files, certificates and logs
+brew "ouch"
+brew "step"
+brew "lnav"
+
 # Languages
 brew "mise"
 brew "maven"

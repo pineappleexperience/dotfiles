@@ -194,7 +194,7 @@ there is one. `:OverseerShell <command>` runs any shell command as a task.
 ### Run indicator
 
 The right side of the statusline shows everything that runs, like the run widget of IntelliJ: servers
-(󰒋), tasks (), a debug session ( running,  paused) and failed tasks (), until they are restarted or
+(󰒋), tasks (󰒓), a debug session (󰃤 running, 󰏤 paused) and failed tasks (󰀨), until they are restarted or
 removed from the task list. Click it to open the task list. Encoding and file format only appear when
 they are not UTF-8 and Unix.
 

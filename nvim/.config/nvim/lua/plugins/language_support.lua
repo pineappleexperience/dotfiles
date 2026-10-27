@@ -413,6 +413,7 @@ return {
 				"git_rebase",
 				"gitcommit",
 				"html",
+				"http",
 				"java",
 				"javascript",
 				"jsdoc",

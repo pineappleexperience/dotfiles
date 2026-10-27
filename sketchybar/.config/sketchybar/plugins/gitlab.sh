@@ -44,7 +44,7 @@ done < <(api "merge_requests?scope=created_by_me&state=opened&per_page=50" | jq 
 
 label=""
 ((${reviews:-0} > 0)) && label+="󰈈 $reviews  "
-((failed > 0)) && label+=" $failed  "
+((failed > 0)) && label+="󰅙 $failed  "
 ((running > 0)) && label+="󰑮 $running  "
 label="${label%  }"
 

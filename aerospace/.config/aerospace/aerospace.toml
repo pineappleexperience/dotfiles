@@ -255,3 +255,33 @@ shift-down = ['volume set 0', 'mode main']
 [[on-window-detected]]
     if.app-id = 'com.microsoft.VSCode'
     run = 'move-node-to-workspace C'
+
+# Viewers and helpers float on the current workspace and can be moved freely
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.Preview' # Preview
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'org.kse.keystore-explorer' # KeyStore Explorer
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.systempreferences' # System Settings
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.calculator' # Calculator
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.archiveutility' # Archive Utility
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.ActivityMonitor' # Activity Monitor
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.sonicwall.SonicWALL-Mobile-Connect' # SonicWall VPN client
+    run = 'layout floating'
